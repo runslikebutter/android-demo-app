@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.butterflymx.butterflymxapiclient.MainFragment"
+        android:label="main_fragment"
+        tools:layout="@layout/fragment_main" />
+
+    <fragment
+        android:id="@+id/signInUpRootFragment"
+        android:name="com.butterflymx.butterflymxapiclient.signinsignup.SignInUpRootFragment"
+        android:label="sign_in_up_root_fragment"
+        tools:layout="@layout/sign_in_up_root" />
+
+    <fragment
+        android:id="@+id/mainTabFragment"
+        android:name="com.butterflymx.butterflymxapiclient.maintab.MainTabFragment"
+        android:label="sign_in_up_root_fragment"
+        tools:layout="@layout/main_tab" />
+
+    <fragment
+        android:id="@+id/login"
+        android:name="com.butterflymx.butterflymxapiclient.signinsignup.login.LoginFragment"
+        android:label="login"
+        tools:layout="@layout/login" />
+
+    <fragment
+        android:id="@+id/incoming_call"
+        android:name="com.butterflymx.butterflymxapiclient.call.CallFragment"
+        android:label="incoming_call"
+        tools:layout="@layout/incoming_call">
+
+        <argument
+            android:name="call_guid"
+            android:defaultValue=" "
+            app:type="String" />
+
+        <argument
+            android:name="call_visitor_image"
+            android:defaultValue=" "
+            app:type="String" />
+
+        <argument
+            android:name="call_panel_name"
+            android:defaultValue=" "
+            app:type="String" />
+
+    </fragment>
+
+</navigation>

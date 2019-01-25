@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">ButterflyMX</string>
+
+    <string name="activity_incoming_accept">Accept</string>
+    <string name="activity_incoming_call_front_door">Front door</string>
+    <string name="activity_incoming_call_mute">Mute</string>
+    <string name="activity_incoming_call_open_door">Open door</string>
+    <string name="activity_incoming_call_panel_colon">Panel:</string>
+    <string name="activity_incoming_call_speaker">Speaker</string>
+    <string name="activity_incoming_camera">"Camera"</string>
+    <string name="activity_incoming_decline">Decline</string>
+    <string name="activity_incoming_end_call">End Call</string>
+    <string name="activity_incoming_open_door_cap">Open Door</string>
+    <string name="activity_incoming_call_visitor">visitor</string>
+
+    <string name="activity_login_email_address">Email Address</string>
+    <string name="activity_login_login">Login</string>
+    <string name="activity_login_prompt_password">Password</string>
+
+
+    <string name="account">Account</string>
+    <string name="features">Features</string>
+    <string name="features_swipe_to_open_door">Feature 1: Swipe to Open Door</string>
+    <string name="feature_use_a_virtual_key">Feature 2: Use a Virtual Key</string>
+    <string name="account_phone_number">Phone Number</string>
+    <string name="account_email">Email Address</string>
+    <string name="account_sign_out">Sign Out</string>
+    <string name="account_edit_password">EDIT PASSWORD</string>
+    <string name="loading">Loading...</string>
+    <string name="new_call_notif_you_have_a_visitor">You have a visitor</string>
+    <string name="new_call_notif_default_title">Front door</string>
+    <string name="call_was_answered_on_another_device">Call was answered on another device.</string>
+    <string name="missed_call">Missed Call</string>
+
+</resources>

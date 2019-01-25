@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2017 Runs Like Butter LLC (butterflymx.com)
+  ~ @author Anton Sydorenko
+  -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <SurfaceView
+        android:id="@+id/video_surface_incoming"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <SurfaceView
+        android:id="@+id/video_surface_outgoing"
+        android:layout_width="80dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_panel_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/activity_incoming_call_panel_colon"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tv_panel_name"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+
+    <TextView
+        android:id="@+id/tv_panel_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/activity_incoming_call_front_door"
+        android:textColor="@color/_f9af56_87"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_panel_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/tv_panel_label"
+        app:layout_constraintTop_toTopOf="@+id/tv_panel_label" />
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/logo_caller_preview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_visitor_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="@string/activity_incoming_call_visitor"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_panel_label" />
+
+    <Button
+        android:id="@+id/tv_door"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/bt_door_selector"
+        android:gravity="center"
+        android:minWidth="240dp"
+        android:minHeight="48dp"
+        android:text="@string/activity_incoming_call_open_door"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/fab_decline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/iv_speaker"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:src="@drawable/button_speaker_active"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_decline"
+        app:layout_constraintEnd_toStartOf="@+id/iv_camera_switch"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/activity_incoming_call_speaker"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/iv_speaker"
+        app:layout_constraintStart_toStartOf="@+id/iv_speaker"
+        app:layout_constraintTop_toBottomOf="@+id/iv_speaker" />
+
+    <ImageButton
+        android:id="@+id/iv_camera_switch"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:src="@drawable/button_camera"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_decline"
+        app:layout_constraintEnd_toStartOf="@+id/iv_mic_switch"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_speaker" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/activity_incoming_camera"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/iv_camera_switch"
+        app:layout_constraintStart_toStartOf="@+id/iv_camera_switch"
+        app:layout_constraintTop_toBottomOf="@+id/iv_camera_switch" />
+
+    <ImageButton
+        android:id="@+id/iv_mic_switch"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="16dp"
+        android:background="@null"
+        android:src="@drawable/button_mic"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_decline"
+        app:layout_constraintEnd_toStartOf="@+id/fab_decline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/iv_camera_switch" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/activity_incoming_call_mute"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/iv_mic_switch"
+        app:layout_constraintStart_toStartOf="@+id/iv_mic_switch"
+        app:layout_constraintTop_toBottomOf="@+id/iv_mic_switch" />
+
+    <ImageButton
+        android:id="@+id/fab_decline"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="48dp"
+        android:background="@null"
+        android:src="@drawable/button_decline_call"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_mic_switch" />
+
+    <TextView
+        android:id="@+id/tv_end_call_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/activity_incoming_end_call"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/fab_decline"
+        app:layout_constraintStart_toStartOf="@+id/fab_decline"
+        app:layout_constraintTop_toBottomOf="@id/fab_decline" />
+
+    <ImageButton
+        android:id="@+id/fab_accept"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="48dp"
+        android:background="@null"
+        android:gravity="center_horizontal"
+        android:src="@drawable/button_accept_call"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_fab_accept_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/activity_incoming_accept"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@id/fab_accept"
+        app:layout_constraintStart_toStartOf="@id/fab_accept"
+        app:layout_constraintTop_toBottomOf="@id/fab_accept" />
+
+    <ImageButton
+        android:id="@+id/fab_decline_new_call"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="48dp"
+        android:background="@null"
+        android:src="@drawable/button_decline_call"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_decline_call_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/activity_incoming_decline"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@id/fab_decline_new_call"
+        app:layout_constraintStart_toStartOf="@id/fab_decline_new_call"
+        app:layout_constraintTop_toBottomOf="@id/fab_decline_new_call" />
+
+    <ImageButton
+        android:id="@+id/fab_open_door"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="4dp"
+        android:background="@null"
+        android:src="@drawable/open_door"
+        app:layout_constraintBottom_toTopOf="@+id/tv_open_door_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_open_door_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="@string/activity_incoming_open_door_cap"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/fab_accept"
+        app:layout_constraintEnd_toEndOf="@id/fab_open_door"
+        app:layout_constraintStart_toStartOf="@id/fab_open_door" />
+
+    <android.support.constraint.Group
+        android:id="@+id/group_control_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="video_surface_outgoing,iv_camera_switch,iv_mic_switch,iv_speaker,fab_decline,tv_door" />
+
+    <android.support.constraint.Group
+        android:id="@+id/group_init_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="fab_open_door,fab_accept,fab_decline_new_call,tv_decline_call_label,tv_fab_accept_label,tv_open_door_label" />
+
+
+</android.support.constraint.ConstraintLayout>
