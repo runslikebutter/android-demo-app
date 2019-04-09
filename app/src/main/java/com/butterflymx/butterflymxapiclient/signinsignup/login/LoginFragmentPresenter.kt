@@ -7,7 +7,7 @@ import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.butterflymxapiclient.utils.mvp.BasePresenter
 import com.butterflymx.butterflymxapiclient.utils.mvp.BaseView
 import com.butterflymx.sdk.core.AuthData
-import com.butterflymx.sdk.core.ButterflyMxApp
+import com.butterflymx.sdk.core.BMXCore
 import com.butterflymx.sdk.core.RequestCallBack
 
 class LoginFragmentPresenter : BasePresenter<BaseView>() {
@@ -16,7 +16,7 @@ class LoginFragmentPresenter : BasePresenter<BaseView>() {
         view.showLoading()
         try {
             val authData = generateAuthData(email, password)
-            ButterflyMxApp.getInstance(App.getContext()).signIn(authData)
+            BMXCore.getInstance(App.getContext()).signIn(authData)
         } catch (e: Exception) {
             if (isViewAttached) {
                 view.showMessage("Error: ${e.message}")
@@ -45,7 +45,7 @@ class LoginFragmentPresenter : BasePresenter<BaseView>() {
                 //register FireBase Token
                 val mSharedPreferences = App.getContext().getSharedPreferences("BfDemoAppPref", Context.MODE_PRIVATE)
                 val fireBaseToken = mSharedPreferences.getString(Constants.SHARED_PREF_FIREBASE_KEY, "")
-                ButterflyMxApp.getInstance(App.getContext()).registerCloudMessaging(fireBaseToken)
+                BMXCore.getInstance(App.getContext()).registerCloudMessaging(fireBaseToken)
             }
 
             override fun onFailure(e: Exception) {

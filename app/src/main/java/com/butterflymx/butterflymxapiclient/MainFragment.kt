@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
-import com.butterflymx.sdk.core.ButterflyMxApp
+import com.butterflymx.sdk.core.BMXCore
 
 class MainFragment : Fragment() {
 
@@ -16,7 +16,7 @@ class MainFragment : Fragment() {
     }
 
     private fun prepareNextScreen() {
-        if (ButterflyMxApp.getInstance(App.getContext()).isAuthorized()) {
+        if (BMXCore.getInstance(App.getContext()).isAuthorized()) {
             Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.mainTabFragment)
         } else {
             Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.signInUpRootFragment)

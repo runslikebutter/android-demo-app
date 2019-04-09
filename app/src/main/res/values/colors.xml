@@ -26,5 +26,9 @@
     <color name="bg_account_edit_password">#DDDDDD</color>
 
     <color name="ic_launcher_background">#298AD6</color>
+    <color name="features_basic_features">#009789</color>
+    <color name="features_root_background">#F6F7F9</color>
+    <color name="toolbar_background">#F5F5F5</color>
+    <color name="list_fragment_background">#F6F7F9</color>
 
 </resources>

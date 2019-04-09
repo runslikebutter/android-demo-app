@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.butterflymx.butterflymxapiclient.R
 import com.butterflymx.butterflymxapiclient.utils.mvp.BaseView
 import kotlinx.android.synthetic.main.features.*
@@ -16,19 +17,11 @@ class FeaturesFragment : BaseView() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        swipe_to_open_door.setOnClickListener { swipeToOpenDoor() }
-        use_a_virtual_key.setOnClickListener { useVirtualKey() }
-    }
-
-    private fun useVirtualKey() {
-
+        ll_open_door.setOnClickListener { swipeToOpenDoor() }
     }
 
     private fun swipeToOpenDoor() {
-
+        Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.select_unit_fragment)
     }
 
-    override fun onCompleteMainAction() {
-
-    }
 }

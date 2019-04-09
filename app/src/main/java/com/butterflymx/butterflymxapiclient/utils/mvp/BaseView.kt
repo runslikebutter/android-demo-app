@@ -26,5 +26,7 @@ abstract class BaseView : Fragment(), MvpView {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
+    override fun onCompleteMainAction() {
+    }
 
 }

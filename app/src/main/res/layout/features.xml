@@ -2,46 +2,59 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/features_root_background">
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline_start"
-        android:layout_width="1dp"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".1" />
+        android:background="@color/toolbar_background"
+        android:elevation="10dp"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/features_features"
+        app:titleTextColor="@color/black" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline_end"
-        android:layout_width="1dp"
+    <TextView
+        android:id="@+id/tv_basic_features"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent=".9" />
+        android:layout_margin="24dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/features_basic_features"
+        android:textColor="@color/features_basic_features"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <Button
-        android:id="@+id/swipe_to_open_door"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/ll_open_door"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:enabled="false"
-        android:background="@drawable/feature_buttons_color"
-        android:text="@string/features_swipe_to_open_door"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_white_to_light_gray"
+        android:gravity="center"
+        android:minHeight="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_basic_features">
 
-    <Button
-        android:id="@+id/use_a_virtual_key"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/feature_buttons_color"
-        android:text="@string/feature_use_a_virtual_key"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintTop_toBottomOf="@id/swipe_to_open_door" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:src="@drawable/ic_feature_open_door" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:fontFamily="sans-serif"
+            android:gravity="start|center"
+            android:text="@string/features_open_door"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

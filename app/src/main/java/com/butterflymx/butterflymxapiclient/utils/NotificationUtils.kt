@@ -87,8 +87,8 @@ class NotificationUtils {
             if (!isScreenOn) {
                 val wl = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK or PowerManager.ACQUIRE_CAUSES_WAKEUP or PowerManager.ON_AFTER_RELEASE, "MH24_SCREENLOCK")
                 wl.acquire(2000)
-                val wl_cpu = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MH24_SCREENLOCK")
-                wl_cpu.acquire(2000)
+                val wlCpu = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MH24_SCREENLOCK")
+                wlCpu.acquire(2000)
             }
         }
     }

@@ -51,4 +51,25 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/select_unit_fragment"
+        android:name="com.butterflymx.butterflymxapiclient.features.opendoor.SelectUnitFragment"
+        android:label="select_unit_fragment"
+        tools:layout="@layout/list_fragment" />
+
+    <fragment
+        android:id="@+id/select_panel_fragment"
+        android:name="com.butterflymx.butterflymxapiclient.features.opendoor.SelectPanelFragment"
+        android:label="select_unit_fragment"
+        tools:layout="@layout/list_fragment">
+
+        <argument
+            android:name="chosen_unit"
+            android:defaultValue="-1"
+            app:type="Long" />
+
+    </fragment>
+
+
+
 </navigation>

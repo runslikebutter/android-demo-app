@@ -3,7 +3,7 @@ package com.butterflymx.butterflymxapiclient.utils.firebasenotification
 import android.content.Context
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.utils.Constants
-import com.butterflymx.sdk.core.ButterflyMxApp
+import com.butterflymx.sdk.core.BMXCore
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -17,13 +17,13 @@ class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
             val mSharedPreferencesEditor = mSharedPreferences.edit()
             mSharedPreferencesEditor.putString(Constants.SHARED_PREF_FIREBASE_KEY, token).apply()
 
-            if (ButterflyMxApp.getInstance(App.getContext()).isAuthorized()) {
-                ButterflyMxApp.getInstance(App.getContext()).registerCloudMessaging(token)
+            if (BMXCore.getInstance(App.getContext()).isAuthorized()) {
+                BMXCore.getInstance(App.getContext()).registerCloudMessaging(token)
             }
         }
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        ButterflyMxApp.getInstance(App.getContext()).notifyCloudMessageReceived(remoteMessage?.from!!, remoteMessage?.data!!)
+        BMXCore.getInstance(App.getContext()).notifyCloudMessageReceived(remoteMessage?.from!!, remoteMessage?.data!!)
     }
 }

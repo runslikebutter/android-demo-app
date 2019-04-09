@@ -11,8 +11,8 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.butterflymx.butterflymxapiclient.account.AccountFragment
 import com.butterflymx.butterflymxapiclient.R
+import com.butterflymx.butterflymxapiclient.account.AccountFragment
 import com.butterflymx.butterflymxapiclient.features.FeaturesFragment
 import kotlinx.android.synthetic.main.main_tab.*
 

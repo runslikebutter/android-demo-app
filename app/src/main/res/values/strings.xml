@@ -31,5 +31,10 @@
     <string name="new_call_notif_default_title">Front door</string>
     <string name="call_was_answered_on_another_device">Call was answered on another device.</string>
     <string name="missed_call">Missed Call</string>
+    <string name="features_basic_features">Basic Features</string>
+    <string name="features_open_door">Open Door</string>
+    <string name="features_features">Features</string>
+    <string name="select_unit">Select Unit</string>
+    <string name="select_panel">Select Panel</string>
 
 </resources>

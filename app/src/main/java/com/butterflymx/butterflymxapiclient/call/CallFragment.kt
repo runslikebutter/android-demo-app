@@ -13,7 +13,7 @@ import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.R
 import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.butterflymxapiclient.utils.mvp.BaseView
-import com.butterflymx.sdk.call.ButterflyMxCall
+import com.butterflymx.sdk.call.BMXCall
 import com.butterflymx.sdk.call.CallState
 import com.butterflymx.sdk.call.CallStateListener
 import com.butterflymx.sdk.call.interfaces.Call
@@ -32,6 +32,7 @@ class CallFragment : BaseView() {
 
     private var panelName: String? = ""
     private var guid: String? = ""
+    private var TAG = "Call status"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.incoming_call, container, false)
@@ -45,7 +46,7 @@ class CallFragment : BaseView() {
         panelName = intent?.getString(Constants.CALL_PANEL_NAME)
         guid = intent?.getString(Constants.CALL_GUID)
 
-        mCall = ButterflyMxCall.getInstance(App.getContext()).manageCall(guid.toString())
+        mCall = BMXCall.getInstance(App.getContext()).manageCall(guid.toString())
         initView()
         initCall()
     }
@@ -148,22 +149,19 @@ class CallFragment : BaseView() {
                     callStatus = state
                     when (state) {
                         CallState.INCOMING -> {
-                            Log.d("Call status", "Incoming")
+                            Log.d(TAG, "Incoming")
                         }
                         CallState.ANSWERED -> {
-                            Log.d("Call status", "Answered")
+                            Log.d(TAG, "Answered")
                         }
                         CallState.DISMISSED -> {
-                            Log.d("Call status", "Dismissed")
+                            Log.d(TAG, "Dismissed")
                             activity?.finish()
                         }
                     }
                 }
             }
         })
-    }
-
-    override fun onCompleteMainAction() {
     }
 
     private fun finishCall() {

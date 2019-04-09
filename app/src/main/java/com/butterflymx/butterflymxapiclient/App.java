@@ -10,7 +10,7 @@ import com.butterflymx.butterflymxapiclient.call.CallStateCustomListener;
 import com.butterflymx.butterflymxapiclient.utils.Constants;
 import com.butterflymx.butterflymxapiclient.utils.di.DaggerComponent;
 import com.butterflymx.butterflymxapiclient.utils.di.DaggerDaggerComponent;
-import com.butterflymx.sdk.call.ButterflyMxCall;
+import com.butterflymx.sdk.call.BMXCall;
 
 public class App extends Application {
 
@@ -21,14 +21,10 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
-        initDagger();
-        createNotificationChannel();
-        ButterflyMxCall.Companion.getInstance(getContext()).getEvents().register(new CallStateCustomListener());
-
-    }
-
-    private void initDagger() {
         daggerComponent = DaggerDaggerComponent.builder().build();
+        createNotificationChannel();
+        BMXCall.Companion.getInstance(getContext()).getEvents().register(new CallStateCustomListener());
+
     }
 
     public static Context getContext() {
