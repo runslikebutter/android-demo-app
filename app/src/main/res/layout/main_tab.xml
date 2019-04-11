@@ -22,7 +22,7 @@
         android:fitsSystemWindows="true"
         app:itemBackground="@android:color/white"
         app:itemIconTint="@drawable/bottom_navigation_background"
-        app:itemTextColor="@color/blue"
+        app:itemTextColor="@color/bmx_blue"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

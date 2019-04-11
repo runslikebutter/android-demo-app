@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#ff2b9ade</color>
+    <color name="colorPrimaryDark">#1973AA</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="blue">#ff2b9ade</color>
+    <color name="bmx_blue">#ff2b9ade</color>
     <color name="white">#ffffff</color>
     <color name="gray">#ff999999</color>
     <color name="black">#000000</color>
@@ -30,5 +30,8 @@
     <color name="features_root_background">#F6F7F9</color>
     <color name="toolbar_background">#F5F5F5</color>
     <color name="list_fragment_background">#F6F7F9</color>
+    <color name="available_unit_subtitle">#52D421</color>
+    <color name="not_available_unit_subtitle">#32000000</color>
+    <color name="not_available_unit_title">#62000000</color>
 
 </resources>

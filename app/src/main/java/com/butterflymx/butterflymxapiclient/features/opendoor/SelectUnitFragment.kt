@@ -3,6 +3,7 @@ package com.butterflymx.butterflymxapiclient.features.opendoor
 import android.app.Activity
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.LayoutInflater
@@ -41,14 +42,25 @@ class UnitsAdapter(val unitList: List<BMXUnit>, val activity: Activity?) : Recyc
     }
 
     override fun onBindViewHolder(viewHolder: SimpleListFragmentVH, position: Int) {
-        viewHolder.title.text = unitList[position].name
-        viewHolder.subTitle.text = "Id: ${unitList[position].id}"
+        viewHolder.title.text = unitList[position].name.substring(0, 1).toUpperCase() + unitList[position].name.substring(1)
 
-        viewHolder.root.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putLong(CHOSEN_UNIT, unitList[position].id)
+        if (unitList[position].isOpenDoorEnabled) {
+            viewHolder.subTitle.text = activity?.getString(R.string.select_unit_fragment_available)
             if (activity != null) {
-                Navigation.findNavController(activity, R.id.my_nav_host_fragment).navigate(R.id.select_panel_fragment, bundle)
+                viewHolder.subTitle.setTextColor(ContextCompat.getColor(activity.applicationContext, R.color.available_unit_subtitle))
+            }
+            viewHolder.root.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putLong(CHOSEN_UNIT, unitList[position].id)
+                if (activity != null) {
+                    Navigation.findNavController(activity, R.id.my_nav_host_fragment).navigate(R.id.select_panel_fragment, bundle)
+                }
+            }
+        } else {
+            viewHolder.subTitle.text = activity?.getString(R.string.select_unit_fragment__not_available)
+            if (activity != null) {
+                viewHolder.subTitle.setTextColor(ContextCompat.getColor(activity.applicationContext, R.color.not_available_unit_subtitle))
+                viewHolder.title.setTextColor(ContextCompat.getColor(activity.applicationContext, R.color.not_available_unit_title))
             }
         }
     }

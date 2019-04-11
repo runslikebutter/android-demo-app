@@ -103,7 +103,7 @@
         android:layout_marginEnd="8dp"
         android:background="@color/bg_account_edit_password"
         android:text="@string/account_edit_password"
-        android:textColor="@color/blue"
+        android:textColor="@color/bmx_blue"
         app:layout_constraintEnd_toStartOf="@+id/bt_sign_out"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

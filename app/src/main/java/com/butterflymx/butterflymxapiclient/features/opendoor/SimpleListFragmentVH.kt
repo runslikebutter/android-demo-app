@@ -8,4 +8,5 @@ class SimpleListFragmentVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val root = itemView.rootView
     val title = itemView.tv_title
     val subTitle = itemView.tv_sub_title
+    val progressBar = itemView.progress_bar
 }
