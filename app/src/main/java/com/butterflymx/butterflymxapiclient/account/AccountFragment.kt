@@ -23,6 +23,20 @@ class AccountFragment : Fragment() {
             BMXCore.getInstance(App.getContext()).signOut()
             Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.mainFragment)
         }
+
+        val units = StringBuilder()
+        for (unit in BMXCore.getInstance(App.getContext()).user.units) {
+            if (!unit.name.isEmpty()) {
+                units.append(unit.name[0])
+                units.append(unit.name.substring(1))
+                units.append("; ")
+            }
+        }
+
+        tv_full_name.text = BMXCore.getInstance(App.getContext()).user.displayName
+        et_email.setText(BMXCore.getInstance(App.getContext()).user.email)
+        et_phone_number.setText(BMXCore.getInstance(App.getContext()).user.phoneNumber)
+
     }
 
 }
