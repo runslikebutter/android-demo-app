@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "838340735032",
+    "firebase_url": "https://butterflymx-demo-app.firebaseio.com",
+    "project_id": "butterflymx-demo-app",
+    "storage_bucket": "butterflymx-demo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838340735032:android:368db91b7e997316",
+        "android_client_info": {
+          "package_name": "com.butterflymx.butterflymxapiclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "838340735032-3k71folv3ooosgead9i6ckl8hffk5k3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7KQHlkUlVKpg89naWBJ0Z1cpKHCU_CBU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
