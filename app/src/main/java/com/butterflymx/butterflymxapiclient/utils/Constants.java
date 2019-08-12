@@ -2,8 +2,6 @@ package com.butterflymx.butterflymxapiclient.utils;
 
 public class Constants {
 
-    public static final String SHARED_PREF_FIREBASE_KEY = "SHARED_PREF_FIREBASE_KEY";
-
     public static final String NOTIFICATION_CHANNEL_NAME = "ButterflyMX Demo App Notifications";
     public static final String NOTIFICATION_CHANNEL_ID = "bmx_channel_01";
 

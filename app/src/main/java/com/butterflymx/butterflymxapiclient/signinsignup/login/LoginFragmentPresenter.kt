@@ -42,11 +42,7 @@ class LoginFragmentPresenter : BasePresenter<BaseView>() {
                     view.hideLoading()
                     view.onCompleteMainAction()
                 }
-                //register FireBase Token
-                val mSharedPreferences = App.getContext().getSharedPreferences("BfDemoAppPref", Context.MODE_PRIVATE)
-                val fireBaseToken = mSharedPreferences.getString(Constants.SHARED_PREF_FIREBASE_KEY, "")
-                BMXCore.getInstance(App.getContext()).registerCloudMessaging(fireBaseToken)
-            }
+             }
 
             override fun onFailure(e: Exception) {
                 if (isViewAttached) {

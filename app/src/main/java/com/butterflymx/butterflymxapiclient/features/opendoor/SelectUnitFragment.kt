@@ -65,7 +65,6 @@ class UnitsAdapter(val unitList: List<BMXUnit>, val activity: Activity?) : Recyc
         }
     }
 
-
     companion object {
         val CHOSEN_UNIT = "chosen_unit"
     }
