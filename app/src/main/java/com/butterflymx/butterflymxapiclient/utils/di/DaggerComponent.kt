@@ -5,7 +5,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(ModulePresenter::class))
+@Component(modules = [ModulePresenter::class])
 interface DaggerComponent {
 
     fun injectLoginFragment(loginFragment: LoginFragment)

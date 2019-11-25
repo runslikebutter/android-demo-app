@@ -1,9 +1,7 @@
 package com.butterflymx.butterflymxapiclient.signinsignup.login
 
-import android.content.Context
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.R
-import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.butterflymxapiclient.utils.mvp.BasePresenter
 import com.butterflymx.butterflymxapiclient.utils.mvp.BaseView
 import com.butterflymx.sdk.core.AuthData
@@ -42,7 +40,7 @@ class LoginFragmentPresenter : BasePresenter<BaseView>() {
                     view.hideLoading()
                     view.onCompleteMainAction()
                 }
-             }
+            }
 
             override fun onFailure(e: Exception) {
                 if (isViewAttached) {

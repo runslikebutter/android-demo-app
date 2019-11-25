@@ -2,6 +2,7 @@ package com.butterflymx.butterflymxapiclient.utils.firebasenotification
 
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.sdk.call.BMXCall
+import com.butterflymx.sdk.core.BMXCore
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.json.JSONException
@@ -26,12 +27,7 @@ class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
                     data.containsKey("panel_xmpp") &&
                     data.containsKey("panel_sip")) {
 
-//                BMXCore.getInstance(App.getContext()).notifyCloudMessageReceived(from, data)
-
-                BMXCall.getInstance(App.getContext()).processCallStatus(data.getValue("guid"),
-                        data.getValue("call_status"),
-                        data.getValue("panel_xmpp"),
-                        data.getValue("panel_sip"))
+                BMXCore.getInstance(App.getContext()).notifyCloudMessageReceived(from, data)
             }
             return true
         }

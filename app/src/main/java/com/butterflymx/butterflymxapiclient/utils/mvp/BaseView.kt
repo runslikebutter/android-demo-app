@@ -7,7 +7,7 @@ import com.butterflymx.butterflymxapiclient.R
 
 abstract class BaseView : Fragment(), MvpView {
 
-    lateinit var dialog: AlertDialog
+    private lateinit var dialog: AlertDialog
 
     override fun showLoading() {
         if (activity == null) return
@@ -26,7 +26,6 @@ abstract class BaseView : Fragment(), MvpView {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onCompleteMainAction() {
-    }
+    override fun onCompleteMainAction() {}
 
 }
