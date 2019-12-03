@@ -5,40 +5,20 @@ import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.utils.Constants.SHARED_PREF_FIREBASE_KEY
 import com.butterflymx.butterflymxapiclient.utils.Constants.SHARED_PREF_NAME
 import com.butterflymx.sdk.core.BMXCore
+import com.butterflymx.sdk.core.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import org.json.JSONException
-import org.json.JSONObject
 
 class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
 
-
-    private fun onCloudMessage(from: String = "", data: Map<String, String>): Boolean {
-
-        val customData: String = if (data.containsKey("custom_data")) data["custom_data"].toString() else "{}"
-        val customDataJson = JSONObject(customData)
-        val type = try {
-            customDataJson.optString("notification_type", "call")
-        } catch (e: JSONException) {
-            //default value
-            "call"
-        }
-
-        if ("call" == type) {
-            if (data.containsKey("call_status") &&
-                    data.containsKey("guid") &&
-                    data.containsKey("panel_xmpp") &&
-                    data.containsKey("panel_sip")) {
-
-                BMXCore.getInstance(App.context).notifyCloudMessageReceived(from, data)
-            }
-            return true
-        }
-        return false
-    }
-
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        onCloudMessage(remoteMessage?.from!!, remoteMessage.data!!)
+        val bmxCore = BMXCore.getInstance(App.context)
+
+        // all call logic is processed under the hood.
+        // true if it is a valid butterfly mx cloud message
+        val isButterflyNotification = bmxCore.notifyCloudMessageReceived(remoteMessage?.from!!, remoteMessage.data!!)
+
+        Log.i(this::class.java.simpleName, "Demo App received a push. Is this push from ButterflyMX $isButterflyNotification")
     }
 
     override fun onNewToken(token: String?) {
