@@ -11,8 +11,6 @@ import androidx.navigation.Navigation
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.R
 import com.butterflymx.sdk.core.BMXCore
-import com.butterflymx.sdk.core.interfaces.BMXPanel
-import com.butterflymx.sdk.core.interfaces.BMXUnit
 
 class SelectUnitFragment : Fragment() {
 

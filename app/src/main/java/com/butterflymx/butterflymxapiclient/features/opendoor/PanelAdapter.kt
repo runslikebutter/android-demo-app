@@ -57,9 +57,8 @@ class PanelAdapter(val panelList: List<BMXPanel>, val activity: Activity?) : Rec
             subTitleTextView.setTextColor(ContextCompat.getColor(activity.applicationContext, R.color.gray))
             titleTextView.setTextColor(ContextCompat.getColor(activity.applicationContext, R.color.gray))
         }
-        val h = Handler(Looper.getMainLooper())
 
-        h.postDelayed({
+        subTitleTextView.postDelayed({
             subTitleTextView.text = activity?.getString(R.string.select_panel_fragment_press_to_open)
             if (activity != null) {
                 subTitleTextView.setTextColor(ContextCompat.getColor(activity.applicationContext, R.color.bmx_blue))

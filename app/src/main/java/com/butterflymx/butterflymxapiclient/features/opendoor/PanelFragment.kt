@@ -26,16 +26,17 @@ class PanelFragment : Fragment() {
         toolbar.setNavigationOnClickListener { Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).popBackStack() }
         toolbar.title = getString(R.string.select_panel)
 
-        val unitId = arguments?.getLong(CHOSEN_UNIT)
-
-        val panelList = filterPanelsByUnitId(unitId)
-
-        if (panelList.isEmpty()) {
-            Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).popBackStack()
-        } else {
-            val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
-            recyclerView.adapter = PanelAdapter(panelList, activity)
+        if (arguments != null) {
+            val unitId = (arguments as Bundle).getLong(CHOSEN_UNIT)
+            val panelList = filterPanelsByUnitId(unitId)
+            if (panelList.isEmpty()) {
+                Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).popBackStack()
+            } else {
+                val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
+                recyclerView.adapter = PanelAdapter(panelList, activity)
+            }
         }
+
         return view
     }
 
