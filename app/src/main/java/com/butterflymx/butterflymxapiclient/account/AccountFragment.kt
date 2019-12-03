@@ -20,12 +20,12 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bt_sign_out.setOnClickListener {
-            BMXCore.getInstance(App.getContext()).signOut()
+            BMXCore.getInstance(App.context).signOut()
             Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.mainFragment)
         }
 
-        tv_full_name.text = BMXCore.getInstance(App.getContext()).user.displayName
-        et_email.setText(BMXCore.getInstance(App.getContext()).user.email)
-        et_phone_number.setText(BMXCore.getInstance(App.getContext()).user.phoneNumber)
+        tv_full_name.text = BMXCore.getInstance(App.context).user.displayName
+        et_email.setText(BMXCore.getInstance(App.context).user.email)
+        et_phone_number.setText(BMXCore.getInstance(App.context).user.phoneNumber)
     }
 }

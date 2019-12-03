@@ -59,7 +59,7 @@
 
     <fragment
         android:id="@+id/select_panel_fragment"
-        android:name="com.butterflymx.butterflymxapiclient.features.opendoor.SelectPanelFragment"
+        android:name="com.butterflymx.butterflymxapiclient.features.opendoor.PanelFragment"
         android:label="select_unit_fragment"
         tools:layout="@layout/list_fragment">
 

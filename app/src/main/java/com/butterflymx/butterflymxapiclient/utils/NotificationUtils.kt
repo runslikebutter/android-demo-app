@@ -22,28 +22,28 @@ class NotificationUtils {
     private lateinit var intent: PendingIntent
 
     fun showNotification(panelName: String?, guId: String, notificationType: String) {
-        val title = if (TextUtils.isEmpty(panelName)) App.getContext().getString(R.string.new_call_notif_default_title) else panelName!!
+        val title = if (TextUtils.isEmpty(panelName)) App.context.getString(R.string.new_call_notif_default_title) else panelName!!
         var notificationBody = ""
         val notificationId = guId.hashCode()
 
         when (notificationType) {
             Constants.NOTIFICATION_TYPE_NEW_CALL -> {
                 intent = newCallIntent(guId, panelName!!)
-                notificationBody = App.getContext().getString(R.string.new_call_notif_you_have_a_visitor)
+                notificationBody = App.context.getString(R.string.new_call_notif_you_have_a_visitor)
             }
 
             Constants.NOTIFICATION_TYPE_MISSED_CALL -> {
                 intent = missedOrAnsweredAnotherDeviceCall()
-                notificationBody = App.getContext().getString(R.string.missed_call)
+                notificationBody = App.context.getString(R.string.missed_call)
             }
 
             Constants.NOTIFICATION_TYPE_ANSWERED_ON_ANOTHER_DEVICE -> {
                 intent = missedOrAnsweredAnotherDeviceCall()
-                notificationBody = App.getContext().getString(R.string.call_was_answered_on_another_device)
+                notificationBody = App.context.getString(R.string.call_was_answered_on_another_device)
             }
         }
 
-        val mBuilder = NotificationCompat.Builder(App.getContext(), Constants.NOTIFICATION_CHANNEL_ID)
+        val mBuilder = NotificationCompat.Builder(App.context, Constants.NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_notification_icon)
                 .setContentTitle(title)
                 .setContentText(notificationBody)
@@ -58,14 +58,14 @@ class NotificationUtils {
             e.printStackTrace()
         }
         mBuilder.setContentIntent(intent)
-        NotificationManagerCompat.from(App.getContext()).notify(notificationId, mBuilder.build())
+        NotificationManagerCompat.from(App.context).notify(notificationId, mBuilder.build())
     }
 
     private fun newCallIntent(guid: String, panelName: String): PendingIntent {
         val args = Bundle()
         args.putString(Constants.CALL_GUID, guid)
         args.putString(Constants.CALL_PANEL_NAME, panelName)
-        return NavDeepLinkBuilder(App.getContext())
+        return NavDeepLinkBuilder(App.context)
                 .setGraph(R.navigation.mobile_navigation)
                 .setDestination(R.id.incoming_call)
                 .setArguments(args)
@@ -73,15 +73,15 @@ class NotificationUtils {
     }
 
     private fun missedOrAnsweredAnotherDeviceCall(): PendingIntent {
-        val pendingIntent = Intent(App.getContext(), MainActivity::class.java)
-        return PendingIntent.getActivity(App.getContext(), System.currentTimeMillis().toInt(), pendingIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = Intent(App.context, MainActivity::class.java)
+        return PendingIntent.getActivity(App.context, System.currentTimeMillis().toInt(), pendingIntent, PendingIntent.FLAG_UPDATE_CURRENT)
     }
 
     @SuppressLint("InvalidWakeLockTag")
     private fun wakeUpScreen() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
             // Wake up screen
-            val powerManager = App.getContext().getSystemService(Context.POWER_SERVICE) as PowerManager
+            val powerManager = App.context.getSystemService(Context.POWER_SERVICE) as PowerManager
             val isScreenOn: Boolean
             isScreenOn = powerManager.isInteractive
             if (!isScreenOn) {
@@ -94,6 +94,6 @@ class NotificationUtils {
     }
 
     fun deleteNotification(guid: String?) {
-        NotificationManagerCompat.from(App.getContext()).cancel(guid?.hashCode()!!)
+        NotificationManagerCompat.from(App.context).cancel(guid?.hashCode()!!)
     }
 }

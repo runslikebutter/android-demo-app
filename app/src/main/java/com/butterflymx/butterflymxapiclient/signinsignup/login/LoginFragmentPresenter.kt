@@ -1,7 +1,10 @@
 package com.butterflymx.butterflymxapiclient.signinsignup.login
 
+import android.content.Context
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.R
+import com.butterflymx.butterflymxapiclient.utils.Constants
+import com.butterflymx.butterflymxapiclient.utils.Constants.SHARED_PREF_FIREBASE_KEY
 import com.butterflymx.butterflymxapiclient.utils.mvp.BasePresenter
 import com.butterflymx.butterflymxapiclient.utils.mvp.BaseView
 import com.butterflymx.sdk.core.AuthData
@@ -14,7 +17,7 @@ class LoginFragmentPresenter : BasePresenter<BaseView>() {
         view.showLoading()
         try {
             val authData = generateAuthData(email, password)
-            BMXCore.getInstance(App.getContext()).signIn(authData)
+            BMXCore.getInstance(App.context).signIn(authData)
         } catch (e: Exception) {
             if (isViewAttached) {
                 view.showMessage("Error: ${e.message}")
@@ -28,14 +31,19 @@ class LoginFragmentPresenter : BasePresenter<BaseView>() {
         authDataBuilder.setCallBack(createCallBack())
         authDataBuilder.setEmail(email)
         authDataBuilder.setPassword(password)
-        authDataBuilder.setSecretID(App.getContext().getString(R.string.SECRET_ID))
-        authDataBuilder.setClientID(App.getContext().getString(R.string.CLIENT_ID))
+        authDataBuilder.setSecretID(App.context.getString(R.string.SECRET_ID))
+        authDataBuilder.setClientID(App.context.getString(R.string.CLIENT_ID))
         return authDataBuilder.build()
     }
 
     private fun createCallBack(): RequestCallBack {
         return object : RequestCallBack {
             override fun onSuccess() {
+                //register FireBase Token in ButterflyMX SDK
+                val mSharedPreferences = App.context.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+                val fireBaseToken = mSharedPreferences.getString(SHARED_PREF_FIREBASE_KEY, "") ?: ""
+                BMXCore.getInstance(App.context).registerCloudMessaging(fireBaseToken)
+
                 if (isViewAttached) {
                     view.hideLoading()
                     view.onCompleteMainAction()
