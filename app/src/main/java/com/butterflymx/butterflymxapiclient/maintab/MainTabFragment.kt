@@ -35,7 +35,7 @@ class MainTabFragment : Fragment() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1 &&
                 (activity?.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
                         activity?.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)) {
-            requestPermissions(arrayOf(android.Manifest.permission.CAMERA, android.Manifest.permission.RECORD_AUDIO), ACCESS_CAMERA_N_MIC_CODE_REQUEST)
+            requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO), ACCESS_CAMERA_N_MIC_CODE_REQUEST)
         }
     }
 
@@ -58,7 +58,7 @@ class MainTabFragment : Fragment() {
         super.onResume()
         view!!.isFocusableInTouchMode = true
         view!!.requestFocus()
-        view!!.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+        view!!.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                 activity?.finish()
                 return@OnKeyListener true

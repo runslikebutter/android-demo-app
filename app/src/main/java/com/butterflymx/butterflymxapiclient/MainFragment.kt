@@ -16,7 +16,7 @@ class MainFragment : Fragment() {
     }
 
     private fun prepareNextScreen() {
-        if (BMXCore.getInstance(App.getContext()).isAuthorized()) {
+        if (BMXCore.getInstance(App.context).isAuthorized()) {
             Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.mainTabFragment)
         } else {
             Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.signInUpRootFragment)

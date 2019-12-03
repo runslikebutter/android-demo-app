@@ -5,6 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/bt_edit_password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/bg_account_edit_password"
+        android:enabled="false"
+        android:text="@string/account_edit_password"
+        android:textColor="@color/bmx_blue"
+        app:layout_constraintEnd_toStartOf="@+id/bt_sign_out"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ti_phone_number" />
+
+    <Button
+        android:id="@+id/bt_sign_out"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/bg_account_sign_out"
+        android:text="@string/account_sign_out"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/bt_edit_password"
+        app:layout_constraintTop_toBottomOf="@id/ti_phone_number" />
+
     <ImageView
         android:id="@+id/logo"
         android:layout_width="88dp"
@@ -20,11 +51,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/btn_edit"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@id/logo"
         app:layout_constraintEnd_toEndOf="@id/logo" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_full_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -38,19 +70,6 @@
         app:layout_constraintTop_toBottomOf="@id/logo"
         tools:layout_editor_absoluteY="126dp" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Unit 42"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
     <android.support.design.widget.TextInputLayout
         android:id="@+id/ti_email"
         android:layout_width="match_parent"
@@ -61,7 +80,7 @@
         android:theme="@style/TextInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintTop_toBottomOf="@+id/tv_full_name">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/et_email"
@@ -93,35 +112,5 @@
             android:inputType="textPassword" />
 
     </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/bt_edit_password"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/bg_account_edit_password"
-        android:text="@string/account_edit_password"
-        android:textColor="@color/blue"
-        app:layout_constraintEnd_toStartOf="@+id/bt_sign_out"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ti_phone_number" />
-
-    <Button
-        android:id="@+id/bt_sign_out"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:background="@color/bg_account_sign_out"
-        android:text="@string/account_sign_out"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/bt_edit_password"
-        app:layout_constraintTop_toBottomOf="@id/ti_phone_number" />
 
 </android.support.constraint.ConstraintLayout>

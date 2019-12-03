@@ -70,8 +70,8 @@ dependencies {
     implementation 'com.android.support:support-annotations:28.0.0'
 
     //bf repo
-    implementation 'com.butterflymx.sdk.core:sdk-core:0.0.6@aar'
-    implementation 'com.butterflymx.sdk.call:sdk-call:0.0.4@aar'
+    implementation 'com.butterflymx.sdk.core:sdk-core:1.1.2@aar'
+    implementation 'com.butterflymx.sdk.call:sdk-call:1.1.2@aar'
 }
 
 apply plugin: "com.google.gms.google-services"

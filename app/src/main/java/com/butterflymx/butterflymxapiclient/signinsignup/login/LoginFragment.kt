@@ -26,7 +26,7 @@ class LoginFragment : BaseView() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        App.getDagger().injectLoginFragment(this)
+        App.dagger?.injectLoginFragment(this)
         presenter.attachView(this)
 
         bt_login.setOnClickListener { login() }

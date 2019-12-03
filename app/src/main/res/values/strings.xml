@@ -36,5 +36,9 @@
     <string name="features_features">Features</string>
     <string name="select_unit">Select Unit</string>
     <string name="select_panel">Select Panel</string>
+    <string name="select_unit_fragment_available">Available</string>
+    <string name="select_panel_fragment_press_to_open">Press to Open</string>
+    <string name="select_panel_fragment_wait">Wait...</string>
+    <string name="select_unit_fragment__not_available">Not Available</string>
 
 </resources>

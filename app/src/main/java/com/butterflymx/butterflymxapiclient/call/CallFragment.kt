@@ -46,7 +46,7 @@ class CallFragment : BaseView() {
         panelName = intent?.getString(Constants.CALL_PANEL_NAME)
         guid = intent?.getString(Constants.CALL_GUID)
 
-        mCall = BMXCall.getInstance(App.getContext()).manageCall(guid.toString())
+        mCall = BMXCall.getInstance(App.context).processCall(guid.toString())
         initView()
         initCall()
     }
