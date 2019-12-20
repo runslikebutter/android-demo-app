@@ -1,37 +1,56 @@
 package com.butterflymx.butterflymxapiclient.utils.firebasenotification
 
-import android.content.Context
-import com.butterflymx.butterflymxapiclient.App
-import com.butterflymx.butterflymxapiclient.utils.Constants.SHARED_PREF_FIREBASE_KEY
-import com.butterflymx.butterflymxapiclient.utils.Constants.SHARED_PREF_NAME
 import com.butterflymx.sdk.core.BMXCore
-import com.butterflymx.sdk.core.Log
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
 class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        val bmxCore = BMXCore.getInstance(App.context)
+        /**
+         * If the app receives Firebase Cloud Messages not directly from ButterflyMX system,
+         * you should call BMXCore.getInstance(context).notifyCloudMessageReceived(from, data),
+         * check an example bellow.
+         */
 
-        // all call logic is processed under the hood.
-        // true if it is a valid butterfly mx cloud message
-        val isButterflyNotification = bmxCore.notifyCloudMessageReceived(remoteMessage?.from!!, remoteMessage.data!!)
+        //Any string value with length more than 2 letters (e.g. "123"), it will be removed in future releases
+        val from = "123"
 
-        Log.i(this::class.java.simpleName, "Demo App received a push. Is this push from ButterflyMX $isButterflyNotification")
+        remoteMessage?.let {
+            val data = generateValidData(it.data)
+            BMXCore.getInstance(this).notifyCloudMessageReceived(from, data)
+        }
     }
 
     override fun onNewToken(token: String?) {
         super.onNewToken(token)
         if (token != null) {
-
-            val mSharedPreferences = App.context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-            val mSharedPreferencesEditor = mSharedPreferences.edit()
-            mSharedPreferencesEditor.putString(SHARED_PREF_FIREBASE_KEY, token).apply()
-
-            if (BMXCore.getInstance(App.context).isAuthorized()) {
-                BMXCore.getInstance(App.context).registerCloudMessaging(token)
-            }
+            // TODO Register device token on your server side
         }
+    }
+
+    /**
+     * Implement this function according to your remoteMessage structure
+     * You should set the following params to SDK to make it works:
+     *
+     * guid:        valid call GUID value
+     * panel_xmpp:  valid panel XMPP Id
+     * panel_sip:   valid panel SIP Id
+     * custom_data: {'notification_type':'call','notification_id':0}; notification_id should be >= 0
+     * call_status: could be: initializing/canceled/connecting_sip/voip_rollover/rejected/
+     *              timeout_online_signal/answered_on_another_device
+     *              inform the SDK with every new call statuses
+     *
+     * @param remoteMessageData MutableMap<String,String> from your cloud push
+     * @return a valid SDK Map<String,String>
+     */
+    private fun generateValidData(remoteMessageData: MutableMap<String, String>): Map<String, String> {
+        val data = HashMap<String, String>()
+        data["custom_data"] = "{'notification_type':'call','notification_id':0}"
+        data["call_status"] = remoteMessageData["bmx_call_status"] as String
+        data["guid"] = remoteMessageData["bmx_guid"] as String
+        data["panel_xmpp"] = remoteMessageData["bmx_panel_xmpp"] as String
+        data["panel_sip"] = remoteMessageData["bmx_panel_sip"] as String
+        return data
     }
 }
