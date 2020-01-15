@@ -62,7 +62,6 @@ dependencies {
     //notifications
     implementation 'com.google.firebase:firebase-messaging:17.3.0'
 
-    implementation "android.arch.persistence.room:rxjava2:$room_version"
 
     implementation 'moe.banana:moshi-jsonapi:3.2.2'
     implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
