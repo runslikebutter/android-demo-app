@@ -7,56 +7,32 @@ import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.butterflymxapiclient.utils.Constants.SHARED_PREF_FIREBASE_KEY
 import com.butterflymx.butterflymxapiclient.utils.mvp.BasePresenter
 import com.butterflymx.butterflymxapiclient.utils.mvp.BaseView
-import com.butterflymx.sdk.core.AuthData
 import com.butterflymx.sdk.core.BMXCore
-import com.butterflymx.sdk.core.RequestCallBack
+import com.butterflymx.sdk.core.Log
 
 class LoginFragmentPresenter : BasePresenter<BaseView>() {
 
-    fun login(email: String, password: String) {
-        view.showLoading()
-        try {
-            val authData = generateAuthData(email, password)
-            BMXCore.getInstance(App.context).signIn(authData)
-        } catch (e: Exception) {
-            if (isViewAttached) {
-                view.showMessage("Error: ${e.message}")
-                view.hideLoading()
-            }
+    fun onFailureCallBack(e: Exception) {
+        Log.e("AuthorizationListener", "authorization fail with error: ${e.message}")
+        if (isViewAttached) {
+            view?.hideLoading()
+            view?.showMessage("Failure ${e.message}")
         }
     }
 
-    private fun generateAuthData(email: String, password: String): AuthData {
-        val authDataBuilder = AuthData.Builder()
-        authDataBuilder.setCallBack(createCallBack())
-        authDataBuilder.setEmail(email)
-        authDataBuilder.setPassword(password)
-        authDataBuilder.setSecretID(App.context.getString(R.string.SECRET_ID))
-        authDataBuilder.setClientID(App.context.getString(R.string.CLIENT_ID))
-        return authDataBuilder.build()
-    }
+    fun onSuccessCallBack() {
+        Log.d("AuthorizationListener", "authorization completed")
 
-    private fun createCallBack(): RequestCallBack {
-        return object : RequestCallBack {
-            override fun onSuccess() {
-                //register FireBase Token in ButterflyMX SDK
-                val mSharedPreferences = App.context.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
-                val fireBaseToken = mSharedPreferences.getString(SHARED_PREF_FIREBASE_KEY, "") ?: ""
-                BMXCore.getInstance(App.context).registerCloudMessaging(fireBaseToken)
+        view?.hideLoading()
 
-                if (isViewAttached) {
-                    view.hideLoading()
-                    view.onCompleteMainAction()
-                }
-            }
-
-            override fun onFailure(e: Exception) {
-                if (isViewAttached) {
-                    view.hideLoading()
-                    view.showMessage("Failure ${e.message}")
-                }
-            }
+        //register FireBase Token in ButterflyMX SDK
+        val mSharedPreferences = App.context.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val fireBaseToken = mSharedPreferences.getString(SHARED_PREF_FIREBASE_KEY, "") ?: ""
+        if (fireBaseToken.isNotEmpty()) {
+            BMXCore.getInstance(App.context).registerCloudMessaging(fireBaseToken)
+            view?.onCompleteMainAction()
+        } else {
+            view?.showMessage(App.context.getString(R.string.empty_fb_token))
         }
     }
-
 }
