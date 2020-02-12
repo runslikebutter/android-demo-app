@@ -21,7 +21,9 @@ class AccountFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bt_sign_out.setOnClickListener {
             BMXCore.getInstance(App.context).signOut()
-            Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.mainFragment)
+            activity?.let{
+                Navigation.findNavController(it, R.id.my_nav_host_fragment).navigate(R.id.mainFragment)
+            }
         }
 
         tv_full_name.text = BMXCore.getInstance(App.context).user.displayName
