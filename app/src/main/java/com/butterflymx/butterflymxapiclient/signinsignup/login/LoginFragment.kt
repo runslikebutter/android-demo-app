@@ -56,7 +56,8 @@ class LoginFragment : BaseView() {
             val secretId = getString(R.string.secret_id)
             BMXCore.getInstance(it).setAuthConfig(clientId, secretId)
 
-            val oAuthIntent = BMXCore.getInstance(it).getAuthorizationRequestIntent()
+            val redirectUri = getString(R.string.redirect_uri)
+            val oAuthIntent = BMXCore.getInstance(it).getAuthorizationRequestIntent(redirectUri)
             startActivityForResult(oAuthIntent, BMX_REQUEST_CODE)
         }
     }
