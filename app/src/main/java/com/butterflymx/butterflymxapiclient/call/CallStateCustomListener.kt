@@ -8,7 +8,7 @@ import com.butterflymx.sdk.call.interfaces.Call
 
 class CallStateCustomListener : CallReqStateListener {
 
-    override fun onCallReqState(state: CallReqState, call: Call, panelID: String, panelName: String) {
+    override fun onCallReqState(state: CallReqState, call: Call, panelID: Int, panelName: String) {
         when (state) {
             CallReqState.NEW -> {
                 NotificationUtils().showNotification(panelName, call.guid, Constants.NOTIFICATION_TYPE_NEW_CALL)
