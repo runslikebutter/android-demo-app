@@ -23,14 +23,14 @@ class PanelFragment : Fragment() {
         val view = inflater.inflate(R.layout.list_fragment, container, false)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.setNavigationOnClickListener { Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).popBackStack() }
+        toolbar.setNavigationOnClickListener { activity?.let { it1 -> Navigation.findNavController(it1, R.id.my_nav_host_fragment).popBackStack() } }
         toolbar.title = getString(R.string.select_panel)
 
         if (arguments != null) {
             val unitId = (arguments as Bundle).getLong(CHOSEN_UNIT)
             val panelList = filterPanelsByUnitId(unitId)
             if (panelList.isEmpty()) {
-                Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).popBackStack()
+                activity?.let { Navigation.findNavController(it, R.id.my_nav_host_fragment).popBackStack() }
             } else {
                 val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
                 recyclerView.adapter = PanelAdapter(panelList, activity)
@@ -42,11 +42,13 @@ class PanelFragment : Fragment() {
 
     private fun filterPanelsByUnitId(unitId: Long?): List<BMXPanel> {
         val panelList = ArrayList<BMXPanel>()
-        val user = BMXCore.getInstance(App.context).user
-        for (tenant in user.tenants) {
-            if (tenant.unit?.id == unitId) {
-                for (panel in tenant.panels) {
-                    panelList.add(panel)
+        val user = App.context?.let { BMXCore.getInstance(it).user }
+        if (user != null) {
+            for (tenant in user.tenants) {
+                if (tenant.unit?.id == unitId) {
+                    for (panel in tenant.panels) {
+                        panelList.add(panel)
+                    }
                 }
             }
         }

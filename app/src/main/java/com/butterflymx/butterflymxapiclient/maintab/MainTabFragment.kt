@@ -56,9 +56,9 @@ class MainTabFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        view!!.isFocusableInTouchMode = true
-        view!!.requestFocus()
-        view!!.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+        view?.isFocusableInTouchMode = true
+        view?.requestFocus()
+        view?.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
                 activity?.finish()
                 return@OnKeyListener true

@@ -17,7 +17,6 @@ import com.butterflymx.sdk.call.BMXCall
 import com.butterflymx.sdk.call.CallState
 import com.butterflymx.sdk.call.CallStateListener
 import com.butterflymx.sdk.call.interfaces.Call
-import com.butterflymx.sdk.core.Log
 import kotlinx.android.synthetic.main.incoming_call.*
 
 
@@ -40,13 +39,29 @@ class CallFragment : BaseView() {
         return view
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.let {
+            BMXCall.getInstance(it).events.register(object : CallStateListener {
+                override fun onCallState(state: CallState, call: Call) {
+                    when (state) {
+                        CallState.END -> it.finish()
+                    }
+                }
+            })
+        }
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val intent = arguments
         panelName = intent?.getString(Constants.CALL_PANEL_NAME)
         guid = intent?.getString(Constants.CALL_GUID)
 
-        mCall = BMXCall.getInstance(App.context).processCall(guid.toString())
+        App.context?.let {
+            mCall = BMXCall.getInstance(it).getCall(guid.toString())
+        }
         initView()
         initCall()
     }
@@ -143,25 +158,7 @@ class CallFragment : BaseView() {
     }
 
     private fun initCall() {
-        mCall.preview(video_surface_incoming, video_surface_outgoing, object : CallStateListener {
-            override fun onCallState(state: CallState) {
-                activity?.runOnUiThread {
-                    callStatus = state
-                    when (state) {
-                        CallState.INCOMING -> {
-                            Log.d(TAG, "Incoming")
-                        }
-                        CallState.ANSWERED -> {
-                            Log.d(TAG, "Answered")
-                        }
-                        CallState.DISMISSED -> {
-                            Log.d(TAG, "Dismissed")
-                            activity?.finish()
-                        }
-                    }
-                }
-            }
-        })
+        mCall.preview(video_surface_incoming, video_surface_outgoing)
     }
 
     private fun finishCall() {

@@ -16,10 +16,12 @@ class MainFragment : Fragment() {
     }
 
     private fun prepareNextScreen() {
-        if (BMXCore.getInstance(App.context).isAuthorized()) {
-            Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.mainTabFragment)
-        } else {
-            Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.signInUpRootFragment)
+        activity?.let {
+            if (App.context?.let { it1 -> BMXCore.getInstance(it1).isAuthorized() } == true) {
+                Navigation.findNavController(it, R.id.my_nav_host_fragment).navigate(R.id.mainTabFragment)
+            } else {
+                Navigation.findNavController(it, R.id.my_nav_host_fragment).navigate(R.id.signInUpRootFragment)
+            }
         }
     }
 }

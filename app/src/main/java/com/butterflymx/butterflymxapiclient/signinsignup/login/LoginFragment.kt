@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.R
+import com.butterflymx.butterflymxapiclient.utils.ButterflyMxConfigBuilder
 import com.butterflymx.butterflymxapiclient.utils.mvp.BaseView
 import com.butterflymx.sdk.core.AuthorizationListener
 import com.butterflymx.sdk.core.BMXCore
@@ -53,36 +54,25 @@ class LoginFragment : BaseView() {
                 }
             })
 
-
-            var clientId: String? = null
-            var secretId: String? = null
-            var endpointType: EndpointType? = null
-
-            when (rg_server?.checkedRadioButtonId) {
+            val config = when (rg_server?.checkedRadioButtonId) {
                 R.id.rb_staging -> {
-                    clientId = getString(R.string.staging_client_id)
-                    secretId = getString(R.string.staging_secret_id)
-                    endpointType = EndpointType.STAGING
+                    ButterflyMxConfigBuilder.getButterflyMxConfig(EndpointType.STAGING, it)
                 }
                 R.id.rb_production -> {
-                    clientId = getString(R.string.prod_client_id)
-                    secretId = getString(R.string.prod_secret_id)
-                    endpointType = EndpointType.PROD
+                    ButterflyMxConfigBuilder.getButterflyMxConfig(EndpointType.PROD, it)
                 }
                 R.id.rb_sandbox -> {
-                    clientId = getString(R.string.sandbox_client_id)
-                    secretId = getString(R.string.sandbox_secret_id)
-                    endpointType = EndpointType.SANDBOX
+                    ButterflyMxConfigBuilder.getButterflyMxConfig(EndpointType.SANDBOX, it)
                 }
                 else -> {
                     hideLoading()
                     showMessage(getString(R.string.server_error))
+                    null
                 }
             }
 
-            if (endpointType != null && clientId != null && secretId != null) {
-                BMXCore.getInstance(it).setEndpointType(endpointType)
-                BMXCore.getInstance(it).setAuthConfig(clientId, secretId)
+            if (config != null) {
+                BMXCore.getInstance(it).setConfig(config)
                 val redirectUri = getString(R.string.redirect_uri)
                 val oAuthIntent = BMXCore.getInstance(it).getAuthorizationRequestIntent(redirectUri)
                 startActivityForResult(oAuthIntent, BMX_REQUEST_CODE)
@@ -90,6 +80,7 @@ class LoginFragment : BaseView() {
                 hideLoading()
                 showMessage(getString(R.string.server_error))
             }
+
         }
     }
 

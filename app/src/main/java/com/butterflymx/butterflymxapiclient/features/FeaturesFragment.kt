@@ -21,7 +21,7 @@ class FeaturesFragment : BaseView() {
     }
 
     private fun swipeToOpenDoor() {
-        Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).navigate(R.id.select_unit_fragment)
+        activity?.let { Navigation.findNavController(it, R.id.my_nav_host_fragment).navigate(R.id.select_unit_fragment) }
     }
 
 }
