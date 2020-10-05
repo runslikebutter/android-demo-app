@@ -96,7 +96,6 @@ class LoginFragment : BaseView() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        Log.e("AuthorizationListener", "resultcode: $resultCode")
         if (activity != null && requestCode == BMX_REQUEST_CODE) {
             BMXCore.getInstance(activity!!).processAuthorizationResponse(data!!)
         }

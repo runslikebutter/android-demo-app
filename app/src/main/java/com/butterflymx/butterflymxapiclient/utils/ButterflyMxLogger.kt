@@ -5,7 +5,7 @@ import com.butterflymx.sdk.core.interfaces.Logger
 
 class ButterflyMxLogger : Logger {
 
-    val TAG = "testlogs"
+    val TAG = "CustomLogger"
 
     override fun d(tag: String, text: String) {
         Log.d(TAG, text)

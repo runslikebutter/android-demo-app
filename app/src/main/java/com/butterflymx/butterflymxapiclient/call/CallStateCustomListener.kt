@@ -11,6 +11,8 @@ import com.butterflymx.sdk.call.interfaces.Call
 
 object CallStateCustomListener : CallStateListener {
 
+    private const val TAG = "CallStateCustomListener"
+
     fun init() {
         App.context?.let { BMXCall.getInstance(it).events.register(this) }
     }
@@ -18,18 +20,14 @@ object CallStateCustomListener : CallStateListener {
     override fun onCallState(state: CallState, call: Call) {
         App.context?.let {
             val panelName = BMXCall.getInstance(it).getCall(call.guid).getDetails()?.panelName
+            Log.d(TAG, "New State $state")
             when (state) {
                 CallState.ACCEPTED_ON_ANOTHER_DEVICE -> {
-                    Log.d("test", "ACCEPTED_ON_ANOTHER_DEVICE")
                     NotificationUtils().deleteNotification(call.guid)
                     NotificationUtils().showNotification(panelName, call.guid, Constants.NOTIFICATION_TYPE_ANSWERED_ON_ANOTHER_DEVICE)
                 }
                 CallState.END -> {
-                    Log.d("test", "END")
                     NotificationUtils().deleteNotification(call.guid)
-                }
-                else -> {
-                    Log.d("test", "ELSE $state")
                 }
             }
         }
