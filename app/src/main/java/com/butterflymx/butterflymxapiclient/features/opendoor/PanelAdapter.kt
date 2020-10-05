@@ -21,7 +21,8 @@ class PanelAdapter(val panelList: List<BMXPanel>, val activity: Activity?) : Rec
     }
 
     override fun onBindViewHolder(viewHolder: SimpleListFragmentVH, position: Int) {
-        viewHolder.title.text = panelList[position].name
+        viewHolder.title.text = "${panelList[position].id} - ${panelList[position].name}"
+
         viewHolder.subTitle.text = activity?.getString(R.string.select_panel_fragment_press_to_open)
         if (activity != null) {
             viewHolder.subTitle.setTextColor(ContextCompat.getColor(activity.applicationContext, R.color.bmx_blue))

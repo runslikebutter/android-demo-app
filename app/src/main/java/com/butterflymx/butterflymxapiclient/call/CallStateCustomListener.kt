@@ -29,7 +29,7 @@ object CallStateCustomListener : CallStateListener {
                     NotificationUtils().deleteNotification(call.guid)
                 }
                 else -> {
-                    Log.d("test", "ELSE")
+                    Log.d("test", "ELSE $state")
                 }
             }
         }

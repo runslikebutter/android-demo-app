@@ -22,11 +22,13 @@ class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
 
         if (status.isNotEmpty() && guid.isNotEmpty()) {
             if (status == "initializing") {
-                BMXCall.getInstance(this).getCall(guid).process(object : CallDetailsLoadedListener {
-                    override fun onCallDetailsLoaded(details: CallDetails) {
-                        NotificationUtils().showNotification(details.panelName, guid, Constants.NOTIFICATION_TYPE_NEW_CALL)
-                    }
-                })
+                App.context?.let {
+                    BMXCall.getInstance(it).getCall(guid).process(object : CallDetailsLoadedListener {
+                        override fun onCallDetailsLoaded(details: CallDetails) {
+                            NotificationUtils().showNotification(details.panelName, guid, Constants.NOTIFICATION_TYPE_NEW_CALL)
+                        }
+                    })
+                }
             } else {
                 NotificationUtils().deleteNotification(guid)
             }
