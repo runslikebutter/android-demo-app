@@ -11,7 +11,7 @@ repositories {
 }
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {
@@ -20,7 +20,7 @@ android {
         }
         applicationId "com.butterflymx.butterflymxapiclient"
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -63,7 +63,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
 
     //notifications
-    implementation 'com.google.firebase:firebase-messaging:17.3.0'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
+    implementation 'com.google.firebase:firebase-core:16.0.8'
 
 
     implementation 'moe.banana:moshi-jsonapi:3.2.2'
@@ -71,9 +72,9 @@ dependencies {
 
     implementation 'com.android.support:support-annotations:28.0.0'
     implementation 'net.openid:appauth:0.7.1'
-    //bf repo
-    implementation 'com.butterflymx.sdk.core:sdk-core:1.2.0@aar'
-    implementation 'com.butterflymx.sdk.call:sdk-call:1.1.3@aar'
+
+    implementation 'com.butterflymx.sdk.core:sdk-core:1.1.8@aar'
+    implementation 'com.butterflymx.sdk.call:sdk-call:1.1.93@aar'
 }
 
 apply plugin: "com.google.gms.google-services"

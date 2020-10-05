@@ -5,12 +5,13 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-
 import com.butterflymx.butterflymxapiclient.call.CallStateCustomListener
+import com.butterflymx.butterflymxapiclient.utils.ButterflyMxConfigBuilder
 import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.butterflymxapiclient.utils.di.DaggerComponent
 import com.butterflymx.butterflymxapiclient.utils.di.DaggerDaggerComponent
-import com.butterflymx.sdk.call.BMXCall
+import com.butterflymx.sdk.core.BMXCore
+import com.butterflymx.sdk.core.EndpointType
 
 class App : Application() {
 
@@ -19,8 +20,18 @@ class App : Application() {
         app = this
         dagger = DaggerDaggerComponent.builder().build()
         createNotificationChannel()
-        BMXCall.getInstance(context).events.register(CallStateCustomListener())
 
+        CallStateCustomListener.init()
+        context?.let {
+            val sharedPreferences = getSharedPreferences(Constants.SHARED_PREF_KEY_ENDPOINT, Context.MODE_PRIVATE)
+            if (sharedPreferences.contains(Constants.SHARED_PREF_KEY_ENDPOINT)) {
+                val endpointTypeInt = sharedPreferences.getInt(Constants.SHARED_PREF_KEY_ENDPOINT, EndpointType.STAGING.ordinal)
+                val endpointType = EndpointType.values()[endpointTypeInt]
+
+                val config = ButterflyMxConfigBuilder.getButterflyMxConfig(endpointType, it)
+                BMXCore.getInstance(it).setConfig(config)
+            }
+        }
     }
 
     private fun createNotificationChannel() {
@@ -37,7 +48,8 @@ class App : Application() {
         var dagger: DaggerComponent? = null
             private set
 
-        val context: Context
-            get() = app!!.applicationContext
+        val context: Context?
+            get() = app?.applicationContext
+
     }
 }

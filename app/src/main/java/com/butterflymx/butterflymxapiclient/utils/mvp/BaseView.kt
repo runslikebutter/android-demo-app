@@ -10,11 +10,12 @@ abstract class BaseView : Fragment(), MvpView {
     private lateinit var dialog: AlertDialog
 
     override fun showLoading() {
-        if (activity == null) return
-        val builder = AlertDialog.Builder(activity!!)
-        builder.setView(R.layout.progress)
-        dialog = builder.create()
-        dialog.show()
+        activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.setView(R.layout.progress)
+            dialog = builder.create()
+            dialog.show()
+        }
     }
 
     override fun hideLoading() {

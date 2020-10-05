@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#ff2b9ade</color>
     <color name="colorPrimaryDark">#1973AA</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#1973AA</color>
 
     <color name="bmx_blue">#ff2b9ade</color>
     <color name="white">#ffffff</color>

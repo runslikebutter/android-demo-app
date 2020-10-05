@@ -1,5 +1,6 @@
 package com.butterflymx.butterflymxapiclient.account
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.R
+import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.sdk.core.BMXCore
 import kotlinx.android.synthetic.main.account.*
 
@@ -20,14 +22,21 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bt_sign_out.setOnClickListener {
-            BMXCore.getInstance(App.context).signOut()
-            activity?.let{
+            activity?.let {
+                val sharedPreferences = it.getSharedPreferences(Constants.SHARED_PREF_KEY_ENDPOINT, Context.MODE_PRIVATE)
+                sharedPreferences.edit().remove(Constants.SHARED_PREF_KEY_ENDPOINT).apply()
+            }
+
+            App.context?.let { it1 -> BMXCore.getInstance(it1).signOut() }
+            activity?.let {
                 Navigation.findNavController(it, R.id.my_nav_host_fragment).navigate(R.id.mainFragment)
             }
         }
 
-        tv_full_name.text = BMXCore.getInstance(App.context).user.displayName
-        et_email.setText(BMXCore.getInstance(App.context).user.email)
-        et_phone_number.setText(BMXCore.getInstance(App.context).user.phoneNumber)
+        App.context?.let {
+            tv_full_name.text = BMXCore.getInstance(it).user.displayName
+            et_email.setText(BMXCore.getInstance(it).user.email)
+            et_phone_number.setText(BMXCore.getInstance(it).user.phoneNumber)
+        }
     }
 }

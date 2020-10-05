@@ -18,13 +18,15 @@ class SelectUnitFragment : Fragment() {
         val view = inflater.inflate(R.layout.list_fragment, container, false)
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
-        toolbar.setNavigationOnClickListener { Navigation.findNavController(activity!!, R.id.my_nav_host_fragment).popBackStack() }
+        toolbar.setNavigationOnClickListener { activity?.let { it1 -> Navigation.findNavController(it1, R.id.my_nav_host_fragment).popBackStack() } }
         toolbar.title = getString(R.string.select_unit)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
 
 
-        recyclerView.adapter = UnitAdapter(BMXCore.getInstance(App.context).user.tenants, activity)
+        App.context?.let {
+            recyclerView.adapter = UnitAdapter(BMXCore.getInstance(it).user.tenants, activity)
+        }
 
         return view
     }

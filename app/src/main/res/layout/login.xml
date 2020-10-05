@@ -2,17 +2,58 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="24dp">
 
     <Button
         android:id="@+id/bt_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="36dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/bg_bt_selector_login"
         android:text="@string/activity_sign_in"
         android:textColor="@color/white"
         android:textStyle="normal|bold"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/rg_server" />
+
+    <RadioGroup
+        android:id="@+id/rg_server"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_radio_group_label">
+
+        <RadioButton
+            android:id="@+id/rb_staging"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:padding="8dp"
+            android:text="@string/server_staging" />
+
+        <RadioButton
+            android:id="@+id/rb_production"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/server_production" />
+
+        <RadioButton
+            android:id="@+id/rb_sandbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/server_sandbox" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_radio_group_label"
+        android:layout_width="match_parent"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_server"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

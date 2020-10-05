@@ -43,5 +43,10 @@
     <string name="auth_error">Something went wrong with your authorization</string>
     <string name="activity_sign_in">Sign In via ButterflyMX</string>
     <string name="empty_fb_token">Firebase token can\'t be empty</string>
+    <string name="server_production">Production</string>
+    <string name="server_staging">Staging</string>
+    <string name="server_sandbox">Sandbox</string>
+    <string name="choose_server">Choose Server</string>
+    <string name="server_error">Something went wrong with choosen server</string>
 
 </resources>
