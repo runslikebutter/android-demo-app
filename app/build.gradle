@@ -73,7 +73,7 @@ dependencies {
     implementation 'com.android.support:support-annotations:28.0.0'
     implementation 'net.openid:appauth:0.7.1'
 
-    implementation 'com.butterflymx.sdk.core:sdk-core:1.1.8@aar'
+    implementation 'com.butterflymx.sdk.core:sdk-core:1.1.10@aar'
     implementation 'com.butterflymx.sdk.call:sdk-call:1.1.93@aar'
 }
 
