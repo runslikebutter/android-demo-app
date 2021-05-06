@@ -74,7 +74,7 @@ dependencies {
     implementation 'net.openid:appauth:0.7.1'
 
     implementation 'com.butterflymx:sdk-core:1.1.11@aar'
-    implementation 'com.butterflymx:sdk-call:1.1.93@aar'
+    implementation 'com.butterflymx:sdk-call:1.1.94@aar'
 }
 
 apply plugin: "com.google.gms.google-services"
