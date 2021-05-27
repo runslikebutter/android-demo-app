@@ -16,6 +16,7 @@ import com.google.firebase.messaging.RemoteMessage
 class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
+        Log.d("FCM", "new message: ${remoteMessage?.data}")
         val data = remoteMessage?.data
         val status = data?.get("call_status") ?: ""
         val guid = data?.get("guid") ?: ""
@@ -45,7 +46,7 @@ class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
                 mSharedPreferencesEditor.putString(SHARED_PREF_KEY_FIREBASE, token).apply()
 
                 if (BMXCore.getInstance(it).isAuthorized()) {
-                    BMXCore.getInstance(it).registerCloudMessaging(token)
+                    //TODO: register FCM token
                 }
             }
         }
