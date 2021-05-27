@@ -29,7 +29,6 @@ class LoginFragmentPresenter : BasePresenter<BaseView>() {
         val mSharedPreferences = App.context?.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val fireBaseToken = mSharedPreferences?.getString(SHARED_PREF_KEY_FIREBASE, "") ?: ""
         if (fireBaseToken.isNotEmpty()) {
-            android.util.Log.d("FCM", "new token: $fireBaseToken")
             //TODO: register FCM token
             view?.onCompleteMainAction()
         } else {

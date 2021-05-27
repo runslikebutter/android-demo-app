@@ -16,7 +16,6 @@ import com.google.firebase.messaging.RemoteMessage
 class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        Log.d("FCM", "new message: ${remoteMessage?.data}")
         val data = remoteMessage?.data
         val status = data?.get("call_status") ?: ""
         val guid = data?.get("guid") ?: ""
