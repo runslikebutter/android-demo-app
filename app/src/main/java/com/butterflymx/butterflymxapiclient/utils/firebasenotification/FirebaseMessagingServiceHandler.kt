@@ -45,7 +45,7 @@ class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
                 mSharedPreferencesEditor.putString(SHARED_PREF_KEY_FIREBASE, token).apply()
 
                 if (BMXCore.getInstance(it).isAuthorized()) {
-                    BMXCore.getInstance(it).registerCloudMessaging(token)
+                    //TODO: register FCM token
                 }
             }
         }

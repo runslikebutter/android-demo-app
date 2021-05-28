@@ -29,7 +29,7 @@ class LoginFragmentPresenter : BasePresenter<BaseView>() {
         val mSharedPreferences = App.context?.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val fireBaseToken = mSharedPreferences?.getString(SHARED_PREF_KEY_FIREBASE, "") ?: ""
         if (fireBaseToken.isNotEmpty()) {
-            App.context?.let { BMXCore.getInstance(it).registerCloudMessaging(fireBaseToken) }
+            //TODO: register FCM token
             view?.onCompleteMainAction()
         } else {
             App.context?.getString(R.string.empty_fb_token)?.let { view?.showMessage(it) }
