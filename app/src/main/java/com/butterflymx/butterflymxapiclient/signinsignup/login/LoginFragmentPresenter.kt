@@ -29,7 +29,7 @@ class LoginFragmentPresenter : BasePresenter<BaseView>() {
         val fireBaseToken = mSharedPreferences?.getString(SHARED_PREF_KEY_FIREBASE, "") ?: ""
         if (fireBaseToken.isNotEmpty()) {
             Log.d("AuthorizationListener", "FCM token: $fireBaseToken")
-            // register FCM token
+            //TODO: register FCM token
             view?.onCompleteMainAction()
         } else {
             App.context?.getString(R.string.empty_fb_token)?.let { view?.showMessage(it) }

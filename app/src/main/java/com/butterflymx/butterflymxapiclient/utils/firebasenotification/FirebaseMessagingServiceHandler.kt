@@ -45,7 +45,7 @@ class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
             Log.d("FCM", "new token: $token")
 
             if (BMXCore.getInstance(it).isAuthorized()) {
-                // register FCM token if needed
+                // TODO: register FCM token
             }
         }
     }
