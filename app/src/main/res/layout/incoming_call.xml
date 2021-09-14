@@ -3,7 +3,7 @@
   ~ @author Anton Sydorenko
   -->
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -263,14 +263,14 @@
         app:layout_constraintEnd_toEndOf="@id/fab_open_door"
         app:layout_constraintStart_toStartOf="@id/fab_open_door" />
 
-    <android.support.constraint.Group
+    <androidx.constraintlayout.widget.Group
         android:id="@+id/group_control_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
         app:constraint_referenced_ids="video_surface_outgoing,iv_camera_switch,iv_mic_switch,iv_speaker,fab_decline,tv_door" />
 
-    <android.support.constraint.Group
+    <androidx.constraintlayout.widget.Group
         android:id="@+id/group_init_call"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -278,4 +278,4 @@
         app:constraint_referenced_ids="fab_open_door,fab_accept,fab_decline_new_call,tv_decline_call_label,tv_fab_accept_label,tv_open_door_label" />
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
