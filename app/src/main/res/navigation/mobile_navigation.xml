@@ -37,17 +37,17 @@
         <argument
             android:name="call_guid"
             android:defaultValue=" "
-            app:type="String" />
+            app:argType="string" />
 
         <argument
             android:name="call_visitor_image"
             android:defaultValue=" "
-            app:type="String" />
+            app:argType="string" />
 
         <argument
             android:name="call_panel_name"
             android:defaultValue=" "
-            app:type="String" />
+            app:argType="string" />
 
     </fragment>
 
@@ -65,8 +65,8 @@
 
         <argument
             android:name="chosen_unit"
-            android:defaultValue="-1"
-            app:type="Long" />
+            android:defaultValue="-1L"
+            app:argType="long" />
 
     </fragment>
 

@@ -9,8 +9,8 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.os.Bundle
 import android.os.PowerManager
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import android.text.TextUtils
 import androidx.navigation.NavDeepLinkBuilder
 import com.butterflymx.butterflymxapiclient.App

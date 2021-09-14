@@ -1,6 +1,7 @@
 package com.butterflymx.butterflymxapiclient.utils.firebasenotification
 
 import android.content.Context
+import android.util.Log
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.butterflymxapiclient.utils.Constants.SHARED_PREF_KEY_FIREBASE
@@ -15,11 +16,11 @@ import com.google.firebase.messaging.RemoteMessage
 
 class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
 
-    override fun onMessageReceived(remoteMessage: RemoteMessage?) {
-        val data = remoteMessage?.data
-        val status = data?.get("call_status") ?: ""
-        val guid = data?.get("guid") ?: ""
-
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        Log.d("FCM", "new msg: $remoteMessage")
+        val data = remoteMessage.data
+        val status = data["call_status"] ?: ""
+        val guid = data["guid"] ?: ""
         if (status.isNotEmpty() && guid.isNotEmpty()) {
             if (status == "initializing") {
                 App.context?.let {
@@ -35,18 +36,16 @@ class FirebaseMessagingServiceHandler : FirebaseMessagingService() {
         }
     }
 
-
-    override fun onNewToken(token: String?) {
+    override fun onNewToken(token: String) {
         super.onNewToken(token)
-        if (token != null) {
-            App.context?.let {
-                val mSharedPreferences = it.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-                val mSharedPreferencesEditor = mSharedPreferences.edit()
-                mSharedPreferencesEditor.putString(SHARED_PREF_KEY_FIREBASE, token).apply()
+        App.context?.let {
+            val mSharedPreferences = it.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            val mSharedPreferencesEditor = mSharedPreferences.edit()
+            mSharedPreferencesEditor.putString(SHARED_PREF_KEY_FIREBASE, token).apply()
+            Log.d("FCM", "new token: $token")
 
-                if (BMXCore.getInstance(it).isAuthorized()) {
-                    //TODO: register FCM token
-                }
+            if (BMXCore.getInstance(it).isAuthorized()) {
+                // TODO: register FCM token
             }
         }
     }

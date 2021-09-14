@@ -1,10 +1,10 @@
 package com.butterflymx.butterflymxapiclient
 
-import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
+import androidx.multidex.MultiDexApplication
 import com.butterflymx.butterflymxapiclient.call.CallStateCustomListener
 import com.butterflymx.butterflymxapiclient.utils.ButterflyMxConfigBuilder
 import com.butterflymx.butterflymxapiclient.utils.Constants
@@ -13,14 +13,13 @@ import com.butterflymx.butterflymxapiclient.utils.di.DaggerDaggerComponent
 import com.butterflymx.sdk.core.BMXCore
 import com.butterflymx.sdk.core.EndpointType
 
-class App : Application() {
+class App : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
         app = this
         dagger = DaggerDaggerComponent.builder().build()
         createNotificationChannel()
-
         CallStateCustomListener.init()
         context?.let {
             val sharedPreferences = getSharedPreferences(Constants.SHARED_PREF_KEY_ENDPOINT, Context.MODE_PRIVATE)

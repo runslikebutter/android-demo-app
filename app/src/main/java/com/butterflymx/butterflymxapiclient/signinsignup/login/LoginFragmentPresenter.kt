@@ -7,7 +7,6 @@ import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.butterflymxapiclient.utils.Constants.SHARED_PREF_KEY_FIREBASE
 import com.butterflymx.butterflymxapiclient.utils.mvp.BasePresenter
 import com.butterflymx.butterflymxapiclient.utils.mvp.BaseView
-import com.butterflymx.sdk.core.BMXCore
 import com.butterflymx.sdk.core.Log
 
 class LoginFragmentPresenter : BasePresenter<BaseView>() {
@@ -29,6 +28,7 @@ class LoginFragmentPresenter : BasePresenter<BaseView>() {
         val mSharedPreferences = App.context?.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val fireBaseToken = mSharedPreferences?.getString(SHARED_PREF_KEY_FIREBASE, "") ?: ""
         if (fireBaseToken.isNotEmpty()) {
+            Log.d("AuthorizationListener", "FCM token: $fireBaseToken")
             //TODO: register FCM token
             view?.onCompleteMainAction()
         } else {
