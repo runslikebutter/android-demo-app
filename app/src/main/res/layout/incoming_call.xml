@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <SurfaceView
+    <com.butterflymx.sdk.call.BMXVideoView
         android:id="@+id/video_surface_incoming"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <SurfaceView
+    <com.butterflymx.sdk.call.BMXVideoView
         android:id="@+id/video_surface_outgoing"
         android:layout_width="80dp"
         android:layout_height="100dp"

@@ -80,6 +80,8 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.2.0'
     implementation 'net.openid:appauth:0.10.0'
 
+    implementation 'com.twilio:video-android:6.3.0'
+
 //  ButterflyMX SDK
     implementation 'com.butterflymx:sdk-core:1.1.12@aar'
     implementation 'com.butterflymx:sdk-call:1.1.95@aar'
