@@ -72,7 +72,7 @@ dependencies {
 
     //notifications
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
-    implementation 'com.google.firebase:firebase-core:19.0.1'
+    implementation 'com.google.firebase:firebase-core:19.0.2'
 
     implementation 'moe.banana:moshi-jsonapi:3.3.1'
     implementation 'com.squareup.retrofit2:converter-moshi:2.3.0'
@@ -80,9 +80,11 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.2.0'
     implementation 'net.openid:appauth:0.10.0'
 
+    implementation 'com.twilio:video-android:6.3.0'
+
 //  ButterflyMX SDK
     implementation 'com.butterflymx:sdk-core:1.1.12@aar'
-    implementation 'com.butterflymx:sdk-call:1.1.95@aar'
+    implementation 'com.butterflymx:sdk-call:1.1.96@aar'
 }
 
 apply plugin: "com.google.gms.google-services"
