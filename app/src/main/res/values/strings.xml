@@ -49,4 +49,7 @@
     <string name="choose_server">Choose Server</string>
     <string name="server_error">Something went wrong with choosen server</string>
 
+    <string name="butterflymx_client_id">[CLIENT_ID]</string>
+    <string name="butterflymx_secret_id">[SECRET]</string>
+
 </resources>
