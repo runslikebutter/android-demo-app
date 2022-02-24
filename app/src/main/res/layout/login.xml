@@ -16,6 +16,17 @@
         android:textStyle="normal|bold"
         app:layout_constraintTop_toBottomOf="@+id/rg_server" />
 
+    <Button
+        android:id="@+id/bt_launch_app"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_bt_selector_login"
+        android:text="Launch ButterflyMX"
+        android:textColor="@color/white"
+        android:textStyle="normal|bold"
+        app:layout_constraintTop_toBottomOf="@id/bt_login" />
+
     <RadioGroup
         android:id="@+id/rg_server"
         android:layout_width="match_parent"

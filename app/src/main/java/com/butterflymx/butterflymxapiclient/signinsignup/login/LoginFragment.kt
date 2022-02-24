@@ -38,6 +38,14 @@ class LoginFragment : BaseView() {
         presenter?.attachView(this)
 
         bt_login?.setOnClickListener { login() }
+
+        bt_launch_app?.setOnClickListener {
+            val launchIntent: Intent? = requireActivity().packageManager
+                .getLaunchIntentForPackage("com.butterflymx.butterflymx")
+            launchIntent?.let {
+                startActivity(launchIntent)
+            }
+        }
     }
 
     fun login() {
@@ -97,7 +105,7 @@ class LoginFragment : BaseView() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (activity != null && requestCode == BMX_REQUEST_CODE) {
-            BMXCore.getInstance(activity!!).processAuthorizationResponse(data!!)
+            BMXCore.getInstance(requireActivity()).processAuthorizationResponse(data!!)
         }
     }
 }
