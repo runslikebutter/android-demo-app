@@ -4,21 +4,39 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import com.butterflymx.butterflymxapiclient.R
 import com.butterflymx.butterflymxapiclient.account.AccountFragment
 import com.butterflymx.butterflymxapiclient.features.FeaturesFragment
-import kotlinx.android.synthetic.main.main_tab.*
+import com.butterflymx.sdk.core.Log
+import kotlinx.android.synthetic.main.main_tab.bottom_navigation
+import kotlinx.android.synthetic.main.main_tab.view_pager
 
 class MainTabFragment : Fragment() {
 
-    private val ACCESS_CAMERA_N_MIC_CODE_REQUEST = 200
+    companion object {
+        const val TAG = "MainTabFragment"
+        private const val ACCESS_CAMERA_N_MIC_CODE_REQUEST = 200
+    }
+
+    private val requestMultiplePermissionsLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val allGranted = permissions.entries.all { it.value }
+        if (allGranted) {
+            Log.i(TAG, "All Permissions have been granted")
+        } else {
+            Log.i(TAG, "Permission(s) denied")
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.main_tab, container, false)
@@ -32,10 +50,21 @@ class MainTabFragment : Fragment() {
     }
 
     private fun askPermissions() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1 &&
-                (activity?.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val permissionState = ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.POST_NOTIFICATIONS)
+            if (permissionState == PackageManager.PERMISSION_DENIED) {
+                requestMultiplePermissionsLauncher.launch(
+                    arrayOf(Manifest.permission.CAMERA,
+                    Manifest.permission.RECORD_AUDIO,
+                    "android.permission.POST_NOTIFICATIONS"
+                    )
+                )
+            }
+        } else {
+            if ((activity?.checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED ||
                         activity?.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)) {
-            requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO), ACCESS_CAMERA_N_MIC_CODE_REQUEST)
+                requestPermissions(arrayOf(Manifest.permission.CAMERA, Manifest.permission.RECORD_AUDIO), ACCESS_CAMERA_N_MIC_CODE_REQUEST)
+            }
         }
     }
 
