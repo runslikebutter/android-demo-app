@@ -10,7 +10,7 @@ repositories {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 33
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {
@@ -18,8 +18,8 @@ android {
             }
         }
         applicationId "com.butterflymx.butterflymxapiclient"
-        minSdkVersion 24
-        targetSdkVersion 30
+        minSdkVersion 26
+        targetSdkVersion 33
         multiDexEnabled = true
         versionCode 1
         versionName "1.1"
@@ -56,8 +56,9 @@ dependencies {
     implementation("androidx.multidex:multidex:2.0.1")
 
     // Navigation
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //dagger
