@@ -51,5 +51,6 @@
 
     <string name="butterflymx_client_id">[CLIENT_ID]</string>
     <string name="butterflymx_secret_id">[SECRET]</string>
+    <string name="redirect_uri">com.butterflymx.oauth://oauth</string>
 
 </resources>
