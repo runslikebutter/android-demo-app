@@ -46,8 +46,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
-    implementation files('libs/sdk-call-release.aar')
-    implementation files('libs/sdk-core-release.aar')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -84,9 +82,8 @@ dependencies {
 
     implementation 'com.twilio:video-android:7.5.1'
 
-//  ButterflyMX SDK
-//    implementation 'com.butterflymx:sdk-core:1.1.12@aar'
-//    implementation 'com.butterflymx:sdk-call:1.1.96@aar'
+    // Place SDK dependency references here
+    
 
 }
 
