@@ -52,11 +52,11 @@
     <string name="sandbox_client_id">[SANDBOX_CLIENT_ID]</string>
     <string name="sandbox_secret_id">[SANDBOX_CLIENT_SECRET]</string>
 
-    <string name="staging_client_id">[SANDBOX_CLIENT_ID]</string>
-    <string name="staging_secret_id">[SANDBOX_CLIENT_SECRET]</string>
+    <string name="staging_client_id">[STAGING_CLIENT_ID]</string>
+    <string name="staging_secret_id">[STAGING_CLIENT_SECRET]</string>
 
-    <string name="prod_client_id">[SANDBOX_CLIENT_ID]</string>
-    <string name="prod_secret_id">[SANDBOX_CLIENT_SECRET]</string>
+    <string name="prod_client_id">[PROD_CLIENT_ID]</string>
+    <string name="prod_secret_id">[PROD_CLIENT_SECRET]</string>
 
 
     <string name="redirect_uri">com.butterflymx.oauth://oauth</string>
