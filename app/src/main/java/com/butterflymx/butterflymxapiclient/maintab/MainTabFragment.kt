@@ -15,12 +15,14 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.butterflymx.butterflymxapiclient.R
 import com.butterflymx.butterflymxapiclient.account.AccountFragment
+import com.butterflymx.butterflymxapiclient.databinding.MainTabBinding
 import com.butterflymx.butterflymxapiclient.features.FeaturesFragment
 import com.butterflymx.sdk.core.Log
-import kotlinx.android.synthetic.main.main_tab.bottom_navigation
-import kotlinx.android.synthetic.main.main_tab.view_pager
 
 class MainTabFragment : Fragment() {
+
+    private var _binding: MainTabBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         const val TAG = "MainTabFragment"
@@ -39,7 +41,8 @@ class MainTabFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.main_tab, container, false)
+        _binding = MainTabBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,15 +72,15 @@ class MainTabFragment : Fragment() {
     }
 
     private fun initView() {
-        view_pager.adapter = PagerAdapter(childFragmentManager, listOf(FeaturesFragment(), AccountFragment()))
+        binding.viewPager.adapter = PagerAdapter(childFragmentManager, listOf(FeaturesFragment(), AccountFragment()))
     }
 
     private fun initBottomMenu() {
-        bottom_navigation.setOnNavigationItemSelectedListener { menuItem ->
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.action_features -> view_pager.currentItem = 0
-                R.id.action_account -> view_pager.currentItem = 1
-                else -> view_pager.currentItem = 0
+                R.id.action_features -> binding.viewPager.currentItem = 0
+                R.id.action_account -> binding.viewPager.currentItem = 1
+                else -> binding.viewPager.currentItem = 0
             }
             true
         }

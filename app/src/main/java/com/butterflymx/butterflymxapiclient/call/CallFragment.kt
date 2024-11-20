@@ -14,17 +14,20 @@ import android.view.animation.AnimationUtils
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.R
+import com.butterflymx.butterflymxapiclient.databinding.IncomingCallBinding
 import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.butterflymxapiclient.utils.mvp.BaseView
 import com.butterflymx.sdk.call.BMXCall
 import com.butterflymx.sdk.call.CallState
 import com.butterflymx.sdk.call.CallStateListener
 import com.butterflymx.sdk.call.interfaces.Call
-import kotlinx.android.synthetic.main.incoming_call.*
 import java.util.*
 
 
 class CallFragment : BaseView() {
+
+    private var _binding: IncomingCallBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var mCall: Call
     private lateinit var callStatus: CallState
@@ -39,9 +42,9 @@ class CallFragment : BaseView() {
     private var TAG = "Call status"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.incoming_call, container, false)
+        _binding = IncomingCallBinding.inflate(inflater, container, false)
         activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        return view
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +52,7 @@ class CallFragment : BaseView() {
         activity?.let {
             BMXCall.getInstance(it).events.register(object : CallStateListener {
                 override fun onCallState(state: CallState, call: Call) {
-                    when (state) {
-                        CallState.END -> it.finish()
-                    }
+                    if (state == CallState.END) it.finish()
                 }
             })
         }
@@ -72,65 +73,65 @@ class CallFragment : BaseView() {
     }
 
     private fun initView() {
-        group_init_call.visibility = View.VISIBLE
-        group_control_call.visibility = View.GONE
+        binding.groupInitCall.visibility = View.VISIBLE
+        binding.groupControlCall.visibility = View.GONE
 
         val callAnimation = AnimationUtils.loadAnimation(activity, R.anim.call_animation)
-        fab_accept.startAnimation(callAnimation)
-        fab_decline_new_call.startAnimation(callAnimation)
+        binding.fabAccept.startAnimation(callAnimation)
+        binding.fabDeclineNewCall.startAnimation(callAnimation)
 
-        tv_panel_name.text = panelName
+        binding.tvPanelName.text = panelName
 
-        button_screen_toggle.setOnClickListener {
+        binding.buttonScreenToggle.setOnClickListener {
             fullScreenVideo = !fullScreenVideo
             setFullscreenVideo(fullScreenVideo)
         }
 
-        fab_open_door.setOnClickListener {
+        binding.fabOpenDoor.setOnClickListener {
             openDoor()
         }
 
-        tv_door.setOnClickListener {
+        binding.tvDoor.setOnClickListener {
             openDoor()
         }
 
-        fab_decline.setOnClickListener {
+        binding.fabDecline.setOnClickListener {
             finishCall()
         }
 
-        fab_decline_new_call.setOnClickListener {
+        binding.fabDeclineNewCall.setOnClickListener {
             finishCall()
         }
 
-        iv_speaker.setOnClickListener {
+        binding.ivSpeaker.setOnClickListener {
             isSpeakerChecked = !isSpeakerChecked
             mCall.enableSpeaker(isSpeakerChecked)
 
             if (isSpeakerChecked) {
-                iv_speaker.setImageResource(R.drawable.button_speaker_active)
+                binding.ivSpeaker.setImageResource(R.drawable.button_speaker_active)
             } else {
-                iv_speaker.setImageResource(R.drawable.button_speaker)
+                binding.ivSpeaker.setImageResource(R.drawable.button_speaker)
             }
         }
 
-        iv_camera_switch.setOnClickListener {
+        binding.ivCameraSwitch.setOnClickListener {
             cameraListener()
         }
 
-        iv_mic_switch.setOnClickListener {
+        binding.ivMicSwitch.setOnClickListener {
             micListener()
         }
 
-        fab_accept.setOnClickListener {
+        binding.fabAccept.setOnClickListener {
             acceptCall()
         }
     }
 
     private fun acceptCall() {
-        fab_accept.clearAnimation()
-        fab_decline_new_call.clearAnimation()
-        group_init_call.visibility = View.GONE
-        group_control_call.visibility = View.VISIBLE
+        binding.fabAccept.clearAnimation()
+        binding.fabDeclineNewCall.clearAnimation()
+        binding.groupInitCall.visibility = View.GONE
+        binding.groupControlCall.visibility = View.VISIBLE
         mCall.answer()
     }
 
@@ -142,9 +143,9 @@ class CallFragment : BaseView() {
             isMicChecked = !isMicChecked
             mCall.muteMic(isMicChecked)
             if (isMicChecked) {
-                iv_mic_switch.setImageResource(R.drawable.button_mic_active)
+                binding.ivMicSwitch.setImageResource(R.drawable.button_mic_active)
             } else {
-                iv_mic_switch.setImageResource(R.drawable.button_mic)
+                binding.ivMicSwitch.setImageResource(R.drawable.button_mic)
             }
         }
     }
@@ -158,17 +159,17 @@ class CallFragment : BaseView() {
             mCall.enableCamera(isCameraChecked)
 
             if (isCameraChecked) {
-                iv_camera_switch.setImageResource(R.drawable.button_camera_active)
+                binding.ivCameraSwitch.setImageResource(R.drawable.button_camera_active)
 
             } else {
-                iv_camera_switch.setImageResource(R.drawable.button_camera)
+                binding.ivCameraSwitch.setImageResource(R.drawable.button_camera)
 
             }
         }
     }
 
     private fun initCall() {
-        mCall.preview(video_surface_incoming, video_surface_outgoing)
+        mCall.preview(binding.videoSurfaceIncoming, binding.videoSurfaceOutgoing)
     }
 
     private fun finishCall() {
@@ -203,14 +204,14 @@ class CallFragment : BaseView() {
 
         if (screenWidth > 0) {
             // 1.333 this is the proportion between width/height
-            val layoutParams = video_surface_incoming?.layoutParams as ConstraintLayout.LayoutParams
+            val layoutParams = binding.videoSurfaceIncoming?.layoutParams as ConstraintLayout.LayoutParams
 
             if (fullScreen) {
                 layoutParams.height = screenHeight
                 val finalWidth = screenHeight * 4 / 3
                 val padding = (screenWidth - finalWidth) / 2
                 layoutParams.setMargins(padding, 0, padding, 0)
-                video_surface_incoming?.layoutParams = layoutParams
+                binding.videoSurfaceIncoming?.layoutParams = layoutParams
 
                 Log.i(TAG + "/initVideoViews: ", String.format(
                     Locale.US, "set video view height to: %d, width: %d, padding: %d, fullScreen: %b",
@@ -220,20 +221,20 @@ class CallFragment : BaseView() {
                 //			set video view height
                 layoutParams.height = screenWidth * 3 / 4
                 layoutParams.setMargins(0, 0, 0, 0)
-                video_surface_incoming?.layoutParams = layoutParams
+                binding.videoSurfaceIncoming?.layoutParams = layoutParams
 
                 Log.i(TAG + "/initVideoViews: ", String.format(
                     Locale.US, "set video view height to: %d, width: %d, fullScreen: %b",
-                    video_surface_incoming?.layoutParams?.height ?: 0, screenWidth, fullScreen))
+                    binding.videoSurfaceIncoming?.layoutParams?.height ?: 0, screenWidth, fullScreen))
             }
         }
     }
 
     private fun fixZOrder() {
         Log.i(TAG,"fixZOrder()")
-        video_surface_incoming?.setZOrderOnTop(false)
-        video_surface_outgoing?.setZOrderOnTop(true)
-        video_surface_outgoing?.setZOrderMediaOverlay(true)
+        binding.videoSurfaceIncoming?.setZOrderOnTop(false)
+        binding.videoSurfaceOutgoing?.setZOrderOnTop(true)
+        binding.videoSurfaceOutgoing?.setZOrderMediaOverlay(true)
     }
 
 }

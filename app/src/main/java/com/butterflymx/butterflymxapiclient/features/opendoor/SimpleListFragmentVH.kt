@@ -4,11 +4,11 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import kotlinx.android.synthetic.main.simple_list_item.view.*
+import com.butterflymx.butterflymxapiclient.R
 
 class SimpleListFragmentVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val root: View = itemView.rootView
-    val title: TextView = itemView.tv_title
-    val subTitle: TextView = itemView.tv_sub_title
-    val progressBar: ProgressBar = itemView.progress_bar
+    val title: TextView = itemView.findViewById(R.id.tv_title)
+    val subTitle: TextView = itemView.findViewById(R.id.tv_sub_title)
+    val progressBar: ProgressBar = itemView.findViewById(R.id.progress_bar)
 }

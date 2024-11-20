@@ -268,4 +268,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/java,android,windows,intellij,androidstudio
+# Firebase
+app/google-services.json
