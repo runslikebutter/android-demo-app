@@ -15,7 +15,8 @@ import com.butterflymx.sdk.core.interfaces.BMXTenant
 class UnitAdapter(private val tenantList: List<BMXTenant>,
                   val activity: Activity?) : RecyclerView.Adapter<SimpleListFragmentVH>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): SimpleListFragmentVH {
-        return SimpleListFragmentVH(LayoutInflater.from(parent.context).inflate(R.layout.simple_list_item, parent, false))
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.simple_list_item, parent, false)
+        return SimpleListFragmentVH(view)
     }
 
     override fun getItemCount(): Int {

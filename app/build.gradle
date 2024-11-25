@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
 
 repositories {
     flatDir {
@@ -10,7 +9,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 33
+    namespace = "com.butterflymx.butterflymxapiclient"
+    compileSdk 35
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {
@@ -19,7 +19,7 @@ android {
         }
         applicationId "com.butterflymx.butterflymxapiclient"
         minSdkVersion 26
-        targetSdkVersion 33
+        targetSdkVersion 35
         multiDexEnabled = true
         versionCode 1
         versionName "1.1"
@@ -30,8 +30,17 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
     }
 
     buildTypes {
@@ -60,9 +69,9 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //dagger
-    implementation 'com.google.dagger:dagger:2.41'
-    kapt 'com.google.dagger:dagger-compiler:2.41'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.41'
+    implementation 'com.google.dagger:dagger:2.46.1'
+    kapt 'com.google.dagger:dagger-compiler:2.46.1'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.46.1'
 
     //retrofit
     implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
@@ -83,7 +92,8 @@ dependencies {
     implementation 'com.twilio:video-android:7.5.1'
 
     // Place SDK dependency references here
-    
+    implementation files('libs/sdk-call-release.aar')
+    implementation files('libs/sdk-core-release.aar')
 
 }
 

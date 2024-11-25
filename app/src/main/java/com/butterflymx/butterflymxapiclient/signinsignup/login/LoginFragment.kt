@@ -8,16 +8,18 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.R
+import com.butterflymx.butterflymxapiclient.databinding.LoginBinding
 import com.butterflymx.butterflymxapiclient.utils.ButterflyMxConfigBuilder
 import com.butterflymx.butterflymxapiclient.utils.mvp.BaseView
 import com.butterflymx.sdk.core.AuthorizationListener
 import com.butterflymx.sdk.core.BMXCore
 import com.butterflymx.sdk.core.EndpointType
-import com.butterflymx.sdk.core.Log
-import kotlinx.android.synthetic.main.login.*
 import javax.inject.Inject
 
 class LoginFragment : BaseView() {
+
+    private var _binding: LoginBinding? = null
+    private val binding get() = _binding!!
 
     companion object {
         private const val BMX_REQUEST_CODE = 145
@@ -28,7 +30,8 @@ class LoginFragment : BaseView() {
     var presenter: LoginFragmentPresenter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.login, container, false)
+        _binding = LoginBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,9 +40,9 @@ class LoginFragment : BaseView() {
         App.dagger?.injectLoginFragment(this)
         presenter?.attachView(this)
 
-        bt_login?.setOnClickListener { login() }
+        binding.btLogin?.setOnClickListener { login() }
 
-        bt_launch_app?.setOnClickListener {
+        binding.btLaunchApp?.setOnClickListener {
             val launchIntent: Intent? = requireActivity().packageManager
                 .getLaunchIntentForPackage("com.butterflymx.butterflymx")
             launchIntent?.let {
@@ -62,7 +65,7 @@ class LoginFragment : BaseView() {
                 }
             })
 
-            val config = when (rg_server?.checkedRadioButtonId) {
+            val config = when (binding.rgServer?.checkedRadioButtonId) {
                 R.id.rb_staging -> {
                     ButterflyMxConfigBuilder.getButterflyMxConfig(EndpointType.STAGING, it)
                 }

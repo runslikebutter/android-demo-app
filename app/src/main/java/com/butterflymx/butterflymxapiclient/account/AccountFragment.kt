@@ -9,19 +9,24 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.R
+import com.butterflymx.butterflymxapiclient.databinding.AccountBinding
 import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.sdk.core.BMXCore
-import kotlinx.android.synthetic.main.account.*
 
 class AccountFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.account, container, false)
+
+    private var _binding: AccountBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = AccountBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bt_sign_out.setOnClickListener {
+        binding.btSignOut.setOnClickListener {
             activity?.let {
                 val sharedPreferences = it.getSharedPreferences(Constants.SHARED_PREF_KEY_ENDPOINT, Context.MODE_PRIVATE)
                 sharedPreferences.edit().remove(Constants.SHARED_PREF_KEY_ENDPOINT).apply()
@@ -34,9 +39,9 @@ class AccountFragment : Fragment() {
         }
 
         App.context?.let {
-            tv_full_name.text = BMXCore.getInstance(it).user.displayName
-            et_email.setText(BMXCore.getInstance(it).user.email)
-            et_phone_number.setText(BMXCore.getInstance(it).user.phoneNumber)
+            binding.tvFullName.text = BMXCore.getInstance(it).user.displayName
+            binding.etEmail.setText(BMXCore.getInstance(it).user.email)
+            binding.etPhoneNumber.setText(BMXCore.getInstance(it).user.phoneNumber)
         }
     }
 }
