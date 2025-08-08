@@ -8,45 +8,61 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.butterflymx.butterflymxapiclient.R
+import com.butterflymx.butterflymxapiclient.databinding.SimpleListItemBinding
 import com.butterflymx.sdk.core.RequestCallBack
 import com.butterflymx.sdk.core.interfaces.BMXPanel
 
 class PanelAdapter(val panelList: List<BMXPanel>, val activity: Activity?) : RecyclerView.Adapter<SimpleListFragmentVH>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): SimpleListFragmentVH {
-        return SimpleListFragmentVH(LayoutInflater.from(parent.context).inflate(R.layout.simple_list_item, parent, false))
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = SimpleListItemBinding.inflate(inflater, parent, false)
+        return SimpleListFragmentVH(binding)
     }
 
     override fun getItemCount(): Int {
         return panelList.size
     }
 
-    override fun onBindViewHolder(viewHolder: SimpleListFragmentVH, position: Int) {
-        viewHolder.title.text = "${panelList[position].id} - ${panelList[position].name}"
+    override fun onBindViewHolder(holder: SimpleListFragmentVH, position: Int) {
+        // Bind the *current* item once
+        val item = panelList[position]
 
-        viewHolder.subTitle.text = activity?.getString(R.string.select_panel_fragment_press_to_open)
-        if (activity != null) {
-            viewHolder.subTitle.setTextColor(ContextCompat.getColor(activity.applicationContext, R.color.bmx_blue))
-        }
-        viewHolder.root.setOnClickListener {
-            if (activity != null) {
-                viewHolder.subTitle.text = activity.getString(R.string.select_panel_fragment_wait)
-                viewHolder.subTitle.setTextColor(ContextCompat.getColor(activity.applicationContext, R.color.gray))
-                viewHolder.progressBar.visibility = View.VISIBLE
+        holder.title.text = "${item.id} - ${item.name}"
+        holder.subTitle.text = holder.itemView.context.getString(R.string.select_panel_fragment_press_to_open)
+        holder.subTitle.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.bmx_blue))
+        holder.progressBar.visibility = View.GONE
+        holder.root.isEnabled = true
 
-                viewHolder.root.isEnabled = false
-                panelList[position].openDoor(object : RequestCallBack {
-                    override fun onFailure(e: Exception) {
-                        viewHolder.progressBar.visibility = View.GONE
-                        showMessageInSubTitle("${panelList[position].name} can't be opened", viewHolder.subTitle, viewHolder.title, viewHolder.root)
-                    }
+        holder.root.setOnClickListener {
+            val pos = holder.adapterPosition
+            if (pos == RecyclerView.NO_POSITION) return@setOnClickListener
 
-                    override fun onSuccess() {
-                        viewHolder.progressBar.visibility = View.GONE
-                        showMessageInSubTitle("${panelList[position].name} opened", viewHolder.subTitle, viewHolder.title, viewHolder.root)
-                    }
+            val current = panelList[pos]
 
-                })
-            }
+            holder.subTitle.text = holder.itemView.context.getString(R.string.select_panel_fragment_wait)
+            holder.subTitle.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.gray))
+            holder.progressBar.visibility = View.VISIBLE
+            holder.root.isEnabled = false
+
+            current.openDoor(object : RequestCallBack {
+                override fun onFailure(e: Exception) {
+                    val p = holder.adapterPosition
+                    if (p == RecyclerView.NO_POSITION || panelList.getOrNull(p) !== current) return
+
+                    holder.progressBar.visibility = View.GONE
+                    showMessageInSubTitle("${current.name} can't be opened", holder.subTitle, holder.title, holder.root)
+                    holder.root.isEnabled = true
+                }
+
+                override fun onSuccess() {
+                    val p = holder.adapterPosition
+                    if (p == RecyclerView.NO_POSITION || panelList.getOrNull(p) !== current) return
+
+                    holder.progressBar.visibility = View.GONE
+                    showMessageInSubTitle("${current.name} opened", holder.subTitle, holder.title, holder.root)
+                    holder.root.isEnabled = true
+                }
+            })
         }
     }
 
