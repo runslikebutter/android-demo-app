@@ -11,7 +11,6 @@ import com.butterflymx.butterflymxapiclient.App
 import com.butterflymx.butterflymxapiclient.R
 import com.butterflymx.butterflymxapiclient.utils.Constants
 import com.butterflymx.sdk.core.BMXCore
-import kotlinx.android.synthetic.main.account.*
 
 class AccountFragment : Fragment() {
 
