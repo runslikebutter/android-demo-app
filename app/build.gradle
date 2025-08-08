@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
 
 repositories {
     flatDir {
@@ -10,7 +9,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 33
+    namespace 'com.butterflymx.butterflymxapiclient'
+    compileSdkVersion 35
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {
@@ -19,7 +19,7 @@ android {
         }
         applicationId "com.butterflymx.butterflymxapiclient"
         minSdkVersion 26
-        targetSdkVersion 33
+        targetSdkVersion 35
         multiDexEnabled = true
         versionCode 1
         versionName "1.1"
@@ -30,8 +30,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility 1.8
-        targetCompatibility 1.8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     buildTypes {
@@ -40,9 +40,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
+
+    implementation files('libs/sdk-call-1.2.2.aar')
+    implementation files('libs/sdk-core-1.1.25.aar')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
@@ -60,9 +68,9 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //dagger
-    implementation 'com.google.dagger:dagger:2.41'
-    kapt 'com.google.dagger:dagger-compiler:2.41'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.41'
+    implementation 'com.google.dagger:dagger:2.57'
+    kapt 'com.google.dagger:dagger-compiler:2.57'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.57'
 
     //retrofit
     implementation "com.squareup.moshi:moshi-kotlin:1.14.0"

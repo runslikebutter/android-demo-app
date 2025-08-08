@@ -15,10 +15,9 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.butterflymx.butterflymxapiclient.R
 import com.butterflymx.butterflymxapiclient.account.AccountFragment
+import com.butterflymx.butterflymxapiclient.databinding.MainTabBinding
 import com.butterflymx.butterflymxapiclient.features.FeaturesFragment
 import com.butterflymx.sdk.core.Log
-import kotlinx.android.synthetic.main.main_tab.bottom_navigation
-import kotlinx.android.synthetic.main.main_tab.view_pager
 
 class MainTabFragment : Fragment() {
 
@@ -26,6 +25,9 @@ class MainTabFragment : Fragment() {
         const val TAG = "MainTabFragment"
         private const val ACCESS_CAMERA_N_MIC_CODE_REQUEST = 200
     }
+
+    private var _binding: MainTabBinding? = null
+    private val binding get() = _binding!!
 
     private val requestMultiplePermissionsLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -39,7 +41,8 @@ class MainTabFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.main_tab, container, false)
+        _binding = MainTabBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,6 +50,11 @@ class MainTabFragment : Fragment() {
         initView()
         initBottomMenu()
         askPermissions()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun askPermissions() {
@@ -69,17 +77,20 @@ class MainTabFragment : Fragment() {
     }
 
     private fun initView() {
-        view_pager.adapter = PagerAdapter(childFragmentManager, listOf(FeaturesFragment(), AccountFragment()))
+        binding.viewPager.adapter =
+            PagerAdapter(childFragmentManager, listOf(FeaturesFragment(), AccountFragment()))
     }
 
     private fun initBottomMenu() {
-        bottom_navigation.setOnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.action_features -> view_pager.currentItem = 0
-                R.id.action_account -> view_pager.currentItem = 1
-                else -> view_pager.currentItem = 0
+        binding.bottomNavigation.setOnNavigationItemSelectedListener { menuItem ->
+            with(binding.viewPager) {
+                when (menuItem.itemId) {
+                    R.id.action_features -> currentItem = 0
+                    R.id.action_account -> currentItem = 1
+                    else -> currentItem = 0
+                }
+                true
             }
-            true
         }
     }
 

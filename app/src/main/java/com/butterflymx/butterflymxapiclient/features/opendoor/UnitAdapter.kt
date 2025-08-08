@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.butterflymx.butterflymxapiclient.R
+import com.butterflymx.butterflymxapiclient.databinding.SimpleListItemBinding
 import com.butterflymx.butterflymxapiclient.features.opendoor.PanelFragment.Companion.CHOSEN_UNIT
 import com.butterflymx.sdk.core.interfaces.BMXTenant
 
@@ -15,7 +16,9 @@ import com.butterflymx.sdk.core.interfaces.BMXTenant
 class UnitAdapter(private val tenantList: List<BMXTenant>,
                   val activity: Activity?) : RecyclerView.Adapter<SimpleListFragmentVH>() {
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): SimpleListFragmentVH {
-        return SimpleListFragmentVH(LayoutInflater.from(parent.context).inflate(R.layout.simple_list_item, parent, false))
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = SimpleListItemBinding.inflate(inflater, parent, false)
+        return SimpleListFragmentVH(binding)
     }
 
     override fun getItemCount(): Int {

@@ -29,6 +29,7 @@ object CallStateCustomListener : CallStateListener {
                 CallState.END -> {
                     NotificationUtils().deleteNotification(call.guid)
                 }
+                else -> {}
             }
         }
     }
