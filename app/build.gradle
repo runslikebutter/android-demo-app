@@ -49,6 +49,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Required for 16 KB page size / Google Play (Nov 2025) when using AGP < 8.5.1.
+    // Compresses native libs so they pass the 16 KB zip-boundary check. Prefer upgrading to AGP 8.5.1+ for proper 16 KB alignment.
+    packaging {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
 }
 
 dependencies {
@@ -92,8 +100,8 @@ dependencies {
     implementation 'com.twilio:video-android:7.5.1'
 
     // Place SDK dependency references here
-    implementation files('libs/sdk-call-release.aar')
-    implementation files('libs/sdk-core-release.aar')
+    implementation 'com.butterflymx:sdk-core:1.1.25'
+    implementation 'com.butterflymx:sdk-call:1.2.2'
 
 }
 
