@@ -7,9 +7,12 @@ import com.butterflymx.sdk.core.EndpointType
 
 object ButterflyMxConfigBuilder {
 
+    // Set to false to use the legacy client-secret flow instead
+    private const val USE_PKCE_FLOW = true
+
     fun getButterflyMxConfig(endpointType: EndpointType, context: Context): BMXConfig {
-        var clientId: String? = null
-        var secretId: String? = null
+        val clientId: String
+        val secretId: String?
 
         when (endpointType) {
             EndpointType.STAGING -> {
@@ -27,15 +30,19 @@ object ButterflyMxConfigBuilder {
         }
 
         val sharedPreferences = context.getSharedPreferences(Constants.SHARED_PREF_NAME, Context.MODE_PRIVATE)
-        val editor = sharedPreferences?.edit()
-        editor?.putInt(Constants.SHARED_PREF_KEY_ENDPOINT, endpointType.ordinal)?.apply()
+        sharedPreferences?.edit()?.putInt(Constants.SHARED_PREF_KEY_ENDPOINT, endpointType.ordinal)?.apply()
 
+        val builder = BMXConfig.Builder()
+            .enableDefaultLogger(false)
+            .setEndpointType(endpointType)
+            .setLogger(ButterflyMxLogger())
 
-        return BMXConfig.Builder()
-                .setAuthConfig(clientId, secretId)
-                .enableDefaultLogger(false)
-                .setEndpointType(endpointType)
-                .setLogger(ButterflyMxLogger())
-                .build()
+        return if (USE_PKCE_FLOW) {
+            // PKCE-only flow (recommended) — no secret needed
+            builder.setClientID(clientId).build()
+        } else {
+            // Legacy client-secret flow — set USE_PKCE_FLOW = false to use this path
+            builder.setAuthConfig(clientId, secretId).build()
+        }
     }
 }
