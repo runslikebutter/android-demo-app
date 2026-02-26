@@ -59,6 +59,6 @@
     <string name="prod_secret_id">[PROD_CLIENT_SECRET]</string>
 
 
-    <string name="redirect_uri">com.butterflymx.oauth://oauth</string>
+    <string name="redirect_uri">demoapp://test</string>
 
 </resources>
