@@ -56,6 +56,8 @@ The redirect URI must match what is registered in the ButterflyMX system for you
 manifestPlaceholders = ['appAuthRedirectScheme': 'yourscheme']
 ```
 
+### 4. Place your `google-services.json` at `/app/google-services.json` for FCM services
+
 ---
 
 ## Authentication
